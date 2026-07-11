@@ -1,3 +1,6 @@
 .DS_Store
 __pycache__/
 *.pyc
+
+# Streamlit secrets (실제 비밀번호 등) — 절대 커밋하지 않음. 형식은 .streamlit/secrets.toml.example 참고
+.streamlit/secrets.toml

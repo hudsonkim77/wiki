@@ -7,6 +7,43 @@ st.logo(str(ROOT / "assets" / "logo-full-flat.png"), icon_image=str(ROOT / "asse
 st.image(str(ROOT / "assets" / "logo-nav-flat.png"), width=420)
 
 st.title("경영관리")
+
+
+def _expected_password():
+    # secrets.toml이 아예 없으면(로컬 초기 설정 전 등) st.secrets 접근 자체가 예외를 던진다.
+    try:
+        return st.secrets.get("MGMT_PASSWORD")
+    except Exception:
+        return None
+
+
+def check_password():
+    if st.session_state.get("mgmt_authed"):
+        return True
+
+    expected = _expected_password()
+    if not expected:
+        st.warning(
+            "관리자가 아직 비밀번호(MGMT_PASSWORD)를 설정하지 않아 이 페이지를 열 수 없습니다. "
+            ".streamlit/secrets.toml(로컬) 또는 Streamlit Cloud의 앱 설정 > Secrets(배포판)에 설정하세요."
+        )
+        return False
+
+    st.subheader("🔒 접근 제한")
+    st.caption("경영관리 업무보고는 비밀번호 확인 후 열람할 수 있습니다.")
+    pw = st.text_input("비밀번호", type="password", key="mgmt_pw_input")
+    if st.button("확인"):
+        if pw == expected:
+            st.session_state["mgmt_authed"] = True
+            st.rerun()
+        else:
+            st.error("비밀번호가 올바르지 않습니다.")
+    return False
+
+
+if not check_password():
+    st.stop()
+
 st.caption("업무보고 열람 — 원본 카탈로그: ../4_경영관리/업무보고목록.md")
 
 # 아래 목록은 4_경영관리/업무보고목록.md와 동일 내용을 유지해야 한다(자동 연동 아님).
