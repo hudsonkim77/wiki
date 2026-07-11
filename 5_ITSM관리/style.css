@@ -247,6 +247,35 @@ main {
   color: var(--text-muted);
 }
 
+/* ---------- 최근 변경 요약 ---------- */
+.change-summary {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gridline);
+}
+
+.change-summary-heading {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--series-2);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.change-summary-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.change-summary-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
 /* ---------- 하단 푸터: 정책 링크 ---------- */
 footer {
   max-width: 1120px;
@@ -268,9 +297,294 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* ---------- 팝업(모달): 개인정보처리방침 등 ---------- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-panel {
+  position: relative;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: min(640px, 100%);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 28px 28px 24px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: var(--gridline);
+  color: var(--text-primary);
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+.modal-intro {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.modal-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 18px 0 6px;
+}
+
+.modal-section-body {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.modal-section-list {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
 /* ---------- 관리 화면 placeholder (입력창 설계 전) ---------- */
 .placeholder-note {
   font-size: 13px;
   color: var(--text-muted);
-  margin: 0;
+  margin: 12px 0 0;
+}
+
+/* ---------- 구성관리: 가상 5층 건물 (3D) ---------- */
+.building-stage {
+  height: 460px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 70px;
+  perspective: 1300px;
+  overflow-x: auto;
+}
+
+.building {
+  position: relative;
+  width: 300px;
+  height: 60px;
+  transform-style: preserve-3d;
+  transform: rotateX(-16deg) rotateY(-30deg);
+}
+
+.floor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 60px;
+  transform-style: preserve-3d;
+  cursor: default;
+}
+
+.floor::after {
+  content: attr(data-floor) " " attr(data-name);
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  transform: translateZ(76px);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  padding-bottom: 3px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.floor:hover::after {
+  content: attr(data-floor) " " attr(data-name) " — " attr(data-detail);
+  opacity: 1;
+}
+
+.floor-1 { transform: translateY(0); }
+.floor-2 { transform: translateY(-60px); }
+.floor-3 { transform: translateY(-120px); }
+.floor-4 { transform: translateY(-180px); }
+.floor-5 { transform: translateY(-240px); }
+
+.floor .face {
+  position: absolute;
+  border: 1px solid rgba(0,0,0,0.25);
+}
+
+.floor .face-front {
+  width: 300px;
+  height: 60px;
+  transform: translateZ(75px);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+}
+
+.floor-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.55);
+  line-height: 1.3;
+}
+
+.floor-label b {
+  margin-right: 4px;
+}
+
+.floor .face-side {
+  width: 150px;
+  height: 60px;
+  left: 75px;
+  transform: rotateY(90deg) translateZ(150px);
+  filter: brightness(0.72);
+}
+
+.floor .face-top {
+  width: 300px;
+  height: 150px;
+  top: -45px;
+  transform: rotateX(90deg) translateZ(30px);
+}
+
+.floor-1 .face { background: var(--cat-1); }
+.floor-2 .face { background: var(--cat-7); }
+.floor-3 .face { background: var(--cat-5); }
+.floor-4 .face { background: var(--cat-2); }
+.floor-5 .face {
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.18) 0 2px, transparent 2px 18px),
+    #3a4048;
+}
+.floor-5 .face-side { filter: brightness(0.6); }
+.floor-5 .face-top { filter: brightness(1.25); }
+
+.building-legend {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.building-legend .swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 8px;
+}
+
+.building-legend .swatch.sw-1f { background: var(--cat-1); }
+.building-legend .swatch.sw-2f { background: var(--cat-7); }
+.building-legend .swatch.sw-3f { background: var(--cat-5); }
+.building-legend .swatch.sw-4f { background: var(--cat-2); }
+.building-legend .swatch.sw-5f { background: #3a4048; }
+
+/* ---------- 구성관리: ERD 다이어그램 ---------- */
+.erd-scroll {
+  overflow-x: auto;
+}
+
+.erd-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 46%;
+  min-width: 640px;
+}
+
+.erd-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.erd-line {
+  stroke: var(--baseline);
+  stroke-width: 2;
+}
+
+.erd-line-dashed {
+  stroke-dasharray: 6 5;
+}
+
+.erd-card {
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--text-muted);
+}
+
+.erd-box {
+  position: absolute;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--page-plane);
+  padding: 10px 12px;
+  overflow: hidden;
+}
+
+.erd-box.erd-hub {
+  border-color: var(--series-2);
+  border-width: 2px;
+}
+
+.erd-box-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.erd-box-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.erd-box-field {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }

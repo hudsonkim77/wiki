@@ -90,5 +90,9 @@ c3.caption("이력 미설계 - 이번 CI 등록분만 반영")
 c4.metric("구성관리(삭제)", 0)
 c4.caption("이력 미설계 - 0 고정")
 
+latest_change = change_df.iloc[-1]
+st.markdown(f"**최근 변경 · {latest_change['CHG_TICKET_ID']}** — {latest_change['CHG_TITLE']}")
+st.caption(latest_change["RELATED_DESC"])
+
 st.divider()
 st.caption("개인정보처리방침 · 이용약관 (원고 준비 후 연결 예정)")

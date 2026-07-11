@@ -25,6 +25,12 @@ const ITSM_DASHBOARD_DATA = {
     { category: 'Peripheral', label: '주변기기', count: 3 },
     { category: 'Security_Management', label: '보안관제', count: 2 }
   ],
+  // 최근 변경 요약: 1_변경관리/CHANGE.csv 마지막 행(가장 최근 등록 건) 기준.
+  latestChange: {
+    id: 'CHG_20260711_002',
+    title: '카테고리별 자산 현황 한글 라벨 적용 및 Streamlit 재배포',
+    desc: '홈 화면(정적 HTML 버전 index.html + Streamlit 버전 홈.py) 카테고리별 자산 현황 막대바 라벨을 CI_CATEGORY 영문 코드에서 한글 표시명으로 변경(원본 CI_CATEGORY 값 자체는 유지). GitHub push 후 Streamlit Community Cloud 자동 재배포 완료.'
+  },
   scoreboard: {
     changeCount: 10,
     incidentCount: 0,

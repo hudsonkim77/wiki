@@ -77,4 +77,24 @@
 
     scoreboard.appendChild(tile);
   });
+
+  // ---- 최근 변경 요약 ----
+  const summaryBox = document.getElementById('change-summary');
+  if (summaryBox && data.latestChange) {
+    const heading = document.createElement('div');
+    heading.className = 'change-summary-heading';
+    heading.textContent = `최근 변경 · ${data.latestChange.id}`;
+
+    const title = document.createElement('div');
+    title.className = 'change-summary-title';
+    title.textContent = data.latestChange.title;
+
+    const desc = document.createElement('div');
+    desc.className = 'change-summary-desc';
+    desc.textContent = data.latestChange.desc;
+
+    summaryBox.appendChild(heading);
+    summaryBox.appendChild(title);
+    summaryBox.appendChild(desc);
+  }
 })();

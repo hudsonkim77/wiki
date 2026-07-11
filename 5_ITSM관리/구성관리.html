@@ -11,18 +11,120 @@
 <div id="app-nav"></div>
 
 <main>
+
+  <section class="panel">
+    <p class="panel-title">자산 배치도 · 가상 5층 건물 (전산실 5층)</p>
+    <div class="building-stage">
+      <div class="building" id="ci-building">
+
+        <div class="floor floor-5" data-floor="5F" data-name="전산실(서버실)" data-detail="스토리지 115 · VM 30 · 서버 20 · 스위치 10 · 네트워크보안 10 · 네트워크장비 8 · DMZ서버 15 · 내부보안솔루션 15 · 보안관제 2 (총 225건 장비)">
+          <div class="face face-top"></div>
+          <div class="face face-front"><span class="floor-label"><b>5F</b> 전산실(서버실)</span></div>
+          <div class="face face-side"></div>
+        </div>
+
+        <div class="floor floor-4" data-floor="4F" data-name="인프라운영팀 · Infra_Team" data-detail="인프라 운영 사무실 · 5층 전산실 직접 관리 (담당 자산 228건: 인프라운영팀 213 · Infra_Team 15)">
+          <div class="face face-front"><span class="floor-label"><b>4F</b> 인프라운영팀 · Infra_Team</span></div>
+          <div class="face face-side"></div>
+        </div>
+
+        <div class="floor floor-3" data-floor="3F" data-name="정보화기획팀 · Security_Team" data-detail="IT기획 · 보안 사무실 (담당 자산 41건: 정보화기획팀 6 · Security_Team 35, 보안장비 실물은 5층 전산실에 설치)">
+          <div class="face face-front"><span class="floor-label"><b>3F</b> 정보화기획팀 · Security_Team</span></div>
+          <div class="face face-side"></div>
+        </div>
+
+        <div class="floor floor-2" data-floor="2F" data-name="AI융합사업팀 · 혁신성장팀" data-detail="신사업 · 혁신 사무실 (담당 자산 24건: AI융합사업팀 21 · 혁신성장팀 3)">
+          <div class="face face-front"><span class="floor-label"><b>2F</b> AI융합사업팀 · 혁신성장팀</span></div>
+          <div class="face face-side"></div>
+        </div>
+
+        <div class="floor floor-1" data-floor="1F" data-name="경영지원팀" data-detail="경영지원 사무실 · 로비 (담당 자산 17건)">
+          <div class="face face-front"><span class="floor-label"><b>1F</b> 경영지원팀</span></div>
+          <div class="face face-side"></div>
+        </div>
+
+      </div>
+    </div>
+    <ul class="building-legend">
+      <li><span class="swatch sw-5f"></span>5F · 전산실(서버실) — 스토리지·서버·네트워크·보안장비 225건</li>
+      <li><span class="swatch sw-4f"></span>4F · 인프라운영팀 · Infra_Team — 5층 전산실 관리 사무실</li>
+      <li><span class="swatch sw-3f"></span>3F · 정보화기획팀 · Security_Team — IT기획·보안 사무실</li>
+      <li><span class="swatch sw-2f"></span>2F · AI융합사업팀 · 혁신성장팀 — 신사업·혁신 사무실</li>
+      <li><span class="swatch sw-1f"></span>1F · 경영지원팀 — 경영지원 사무실 · 로비</li>
+    </ul>
+    <p class="placeholder-note">3_구성관리/CI.csv의 OWNER_TEAM 집계를 근거로 임의 구성한 가상 배치도입니다(실제 사무실 위치와 무관). 층에 마우스를 올리면 담당 자산 내역이 표시됩니다.</p>
+  </section>
+
+  <section class="panel">
+    <p class="panel-title">데이터 모델 ERD · CI 허브 구조</p>
+    <div class="erd-scroll"><div class="erd-wrap">
+      <svg class="erd-lines" viewBox="0 0 1000 460" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="230" y1="250" x2="360" y2="130" class="erd-line" />
+        <line x1="230" y1="270" x2="360" y2="390" class="erd-line" />
+        <line x1="590" y1="105" x2="700" y2="105" class="erd-line" />
+        <line x1="590" y1="365" x2="700" y2="365" class="erd-line" />
+        <line x1="790" y1="150" x2="790" y2="320" class="erd-line erd-line-dashed" />
+        <text x="245" y="242" class="erd-card">1</text>
+        <text x="335" y="150" class="erd-card">N</text>
+        <text x="245" y="290" class="erd-card">1</text>
+        <text x="335" y="410" class="erd-card">N</text>
+        <text x="600" y="95" class="erd-card">N</text>
+        <text x="675" y="95" class="erd-card">1</text>
+        <text x="600" y="355" class="erd-card">N</text>
+        <text x="675" y="355" class="erd-card">1</text>
+        <text x="798" y="240" class="erd-card">0..1</text>
+      </svg>
+
+      <div class="erd-box erd-hub" style="left:2%; top:38%; width:20%; height:24%;">
+        <div class="erd-box-title">CI</div>
+        <div class="erd-box-sub">구성관리 · 허브 테이블</div>
+        <div class="erd-box-field">PK · CI_ID</div>
+      </div>
+
+      <div class="erd-box" style="left:33%; top:9%; width:23%; height:22%;">
+        <div class="erd-box-title">CHANGE_CI_MAP</div>
+        <div class="erd-box-sub">변경-구성 연결</div>
+        <div class="erd-box-field">FK · CHG_TICKET_ID</div>
+        <div class="erd-box-field">FK · CI_ID</div>
+      </div>
+
+      <div class="erd-box" style="left:33%; top:74%; width:23%; height:22%;">
+        <div class="erd-box-title">INCIDENT_CI_MAP</div>
+        <div class="erd-box-sub">장애-구성 연결</div>
+        <div class="erd-box-field">FK · INCIDENT_ID</div>
+        <div class="erd-box-field">FK · CI_ID</div>
+      </div>
+
+      <div class="erd-box" style="left:70%; top:9%; width:20%; height:22%;">
+        <div class="erd-box-title">CHANGE</div>
+        <div class="erd-box-sub">변경관리</div>
+        <div class="erd-box-field">PK · CHG_TICKET_ID</div>
+      </div>
+
+      <div class="erd-box" style="left:70%; top:74%; width:20%; height:22%;">
+        <div class="erd-box-title">INCIDENT</div>
+        <div class="erd-box-sub">장애관리</div>
+        <div class="erd-box-field">PK · INCIDENT_ID</div>
+        <div class="erd-box-field">FK · CAUSED_BY_CHG_TICKET_ID</div>
+      </div>
+    </div></div>
+    <p class="placeholder-note">2026-07-11 2주차 데이터모델 ERD 보고 내용을 다이어그램으로 재구성했습니다. 점선은 선택적 FK(변경이 원인이 된 장애인 경우만 연결)입니다. 원본 보고서: <a href="../4_경영관리/_업무보고/20260711_2주차_데이터모델ERD보고.pdf">PDF</a></p>
+  </section>
+
   <section class="panel">
     <p class="panel-title">구성관리</p>
-    <p class="placeholder-note">입력 화면은 아직 설계 전입니다. 설계가 끝나면 이 페이지에 CI 등록/조회 화면이 들어갑니다.</p>
+    <p class="placeholder-note">CI 등록/조회 입력 화면은 아직 설계 전입니다. 설계가 끝나면 이 페이지에 CI 등록/조회 화면이 들어갑니다.</p>
   </section>
+
 </main>
 
 <footer>
-  <a href="개인정보처리방침.html">개인정보처리방침</a>
+  <a href="개인정보처리방침.html" id="privacy-policy-link">개인정보처리방침</a>
   <a href="이용약관.html">이용약관</a>
 </footer>
 
 <script src="nav.js"></script>
+<script src="policy-modal.js"></script>
 <script>renderNav('ci');</script>
 </body>
 </html>
