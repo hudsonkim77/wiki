@@ -1,1 +1,2 @@
 MAP_ID,INCIDENT_ID,CI_ID,IMPACT_DESC
+MAP_0001,INC_20260711_001,CFG_WEB_019,"CHANGE.csv 파싱 실패로 Streamlit 홈.py(대시보드 메인) 전체 화면 에러, 서비스 접속 불가"

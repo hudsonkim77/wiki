@@ -25,15 +25,37 @@ const ITSM_DASHBOARD_DATA = {
     { category: 'Peripheral', label: '주변기기', count: 3 },
     { category: 'Security_Management', label: '보안관제', count: 2 }
   ],
-  // 최근 변경 요약: 1_변경관리/CHANGE.csv 마지막 행(가장 최근 등록 건) 기준.
-  latestChange: {
-    id: 'CHG_20260711_002',
-    title: '카테고리별 자산 현황 한글 라벨 적용 및 Streamlit 재배포',
-    desc: '홈 화면(정적 HTML 버전 index.html + Streamlit 버전 홈.py) 카테고리별 자산 현황 막대바 라벨을 CI_CATEGORY 영문 코드에서 한글 표시명으로 변경(원본 CI_CATEGORY 값 자체는 유지). GitHub push 후 Streamlit Community Cloud 자동 재배포 완료.'
-  },
+  // 최근 사항 3건(변경/자산등록/장애): 각 도메인 CSV의 가장 최근 행 기준으로 하나씩.
+  // 원본이 바뀌면 (특히 장애/자산등록 건이 새로 생기면) 이 배열도 함께 갱신해야 합니다.
+  recentItems: [
+    {
+      type: '변경',
+      accent: 'series-2',
+      id: 'CHG_20260711_003',
+      title: '구성관리 페이지 3D 자산배치도·ERD 다이어그램 신설 및 개인정보처리방침 팝업 적용',
+      date: '2026-07-11',
+      detail: '홈 대시보드에 최근 변경 요약 노출, 구성관리.html에 가상 5층 건물 3D 자산배치도(5층=전산실)와 CI 허브 ERD 다이어그램 신설, 개인정보처리방침을 팝업(모달)으로 전환. 1_변경관리/CHANGE.csv 참고.'
+    },
+    {
+      type: '자산등록',
+      accent: 'series-4',
+      id: 'CFG_WEB_019~022',
+      title: 'ITSM 통합관리대시보드 신규 자산 등록(4건)',
+      date: '2026-07-11',
+      detail: '구성관리 CI 마스터에 신규 자산 4건(CFG_WEB_019~022: ITSM 통합관리대시보드 메인 및 변경·장애·구성관리 하위 메뉴 페이지)을 등록. 등록일시 2026-07-11 12:00, 근거 변경티켓 CHG_20260711_001. 3_구성관리/CI.csv 참고.'
+    },
+    {
+      type: '장애',
+      accent: 'series-3',
+      id: 'INC_20260711_001',
+      title: 'Streamlit 홈.py 대시보드 CHANGE.csv 파싱 에러로 서비스 장애',
+      date: '2026-07-11',
+      detail: '원인: CHG_20260711_003의 RELATED_DESC 필드에 쉼표가 포함됐으나 따옴표로 감싸지 않아 CSV 컬럼이 밀려 pandas ParserError 발생. 조치: 필드를 따옴표로 감싸 복원, 전체 CSV 재검증 후 재배포. 감지 14:00 · 복구 14:10(SEV3). 2_장애관리/INCIDENT.csv 참고.'
+    }
+  ],
   scoreboard: {
-    changeCount: 10,
-    incidentCount: 0,
+    changeCount: 12,
+    incidentCount: 1,
     // 구성관리 추가/삭제 건수: 아직 전체 이력 로그는 없고, CHG_20260711_001로
     // 이 대시보드 자신(4개 메뉴 페이지, CFG_WEB_019~022)을 CI로 신규 등록한
     // 건수만 반영했습니다. 과거분/향후분을 포함한 전체 이력을 추적하려면

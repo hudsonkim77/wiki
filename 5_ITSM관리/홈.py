@@ -90,9 +90,30 @@ c3.caption("이력 미설계 - 이번 CI 등록분만 반영")
 c4.metric("구성관리(삭제)", 0)
 c4.caption("이력 미설계 - 0 고정")
 
+st.subheader("최근 사항 3건")
+
 latest_change = change_df.iloc[-1]
-st.markdown(f"**최근 변경 · {latest_change['CHG_TICKET_ID']}** — {latest_change['CHG_TITLE']}")
-st.caption(latest_change["RELATED_DESC"])
+with st.expander(f"🔵 변경 · {latest_change['CHG_TICKET_ID']} — {latest_change['CHG_TITLE']}"):
+    st.write(latest_change["RELATED_DESC"])
+    st.caption(f"적용일 {latest_change['APPLIED_DT']}")
+
+# 자산등록 이력 로그가 아직 없어(README 참고) 최초 등록 건을 고정 표기. 향후 이력 로그가
+# 생기면 CI.csv에서 최신 등록분을 직접 계산하도록 바꿔야 함.
+with st.expander("🟡 자산등록 · ITSM 통합관리대시보드 신규 자산 등록(4건)"):
+    st.write(
+        "구성관리 CI 마스터에 신규 자산 4건(CFG_WEB_019~022: ITSM 통합관리대시보드 메인 및 "
+        "변경·장애·구성관리 하위 메뉴 페이지)을 등록했습니다."
+    )
+    st.caption("등록일시 2026-07-11 12:00 · 근거 변경티켓 CHG_20260711_001")
+
+if len(incident_df):
+    latest_incident = incident_df.iloc[-1]
+    with st.expander(f"🔴 장애 · {latest_incident['INCIDENT_ID']} — {latest_incident['INCIDENT_TITLE']}"):
+        st.write(f"**원인**: {latest_incident['ROOT_CAUSE']}")
+        st.write(f"**조치**: {latest_incident['ACTION_TAKEN']}")
+        st.caption(f"감지 {latest_incident['DETECTED_DT']} · 복구 {latest_incident['RESOLVED_DT']} ({latest_incident['SEVERITY']})")
+else:
+    st.caption("🔴 장애 · 이력 없음")
 
 st.divider()
 st.caption("개인정보처리방침 · 이용약관 (원고 준비 후 연결 예정)")

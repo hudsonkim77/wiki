@@ -78,23 +78,53 @@
     scoreboard.appendChild(tile);
   });
 
-  // ---- 최근 변경 요약 ----
-  const summaryBox = document.getElementById('change-summary');
-  if (summaryBox && data.latestChange) {
-    const heading = document.createElement('div');
-    heading.className = 'change-summary-heading';
-    heading.textContent = `최근 변경 · ${data.latestChange.id}`;
+  // ---- 최근 사항 3건(변경/자산등록/장애) — 행 클릭 시 세부사항 토글 ----
+  const recentBox = document.getElementById('recent-items');
+  if (recentBox && data.recentItems) {
+    data.recentItems.forEach((item) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'recent-item';
 
-    const title = document.createElement('div');
-    title.className = 'change-summary-title';
-    title.textContent = data.latestChange.title;
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'recent-item-row';
+      row.setAttribute('aria-expanded', 'false');
 
-    const desc = document.createElement('div');
-    desc.className = 'change-summary-desc';
-    desc.textContent = data.latestChange.desc;
+      const accent = document.createElement('span');
+      accent.className = 'recent-item-badge';
+      accent.style.background = `var(--${item.accent})`;
+      accent.textContent = item.type;
 
-    summaryBox.appendChild(heading);
-    summaryBox.appendChild(title);
-    summaryBox.appendChild(desc);
+      const title = document.createElement('span');
+      title.className = 'recent-item-title';
+      title.textContent = item.title;
+
+      const date = document.createElement('span');
+      date.className = 'recent-item-date';
+      date.textContent = item.date;
+
+      row.appendChild(accent);
+      row.appendChild(title);
+      row.appendChild(date);
+
+      const detail = document.createElement('div');
+      detail.className = 'recent-item-detail';
+      const detailId = document.createElement('div');
+      detailId.className = 'recent-item-detail-id';
+      detailId.textContent = item.id;
+      const detailText = document.createElement('div');
+      detailText.textContent = item.detail;
+      detail.appendChild(detailId);
+      detail.appendChild(detailText);
+
+      row.addEventListener('click', () => {
+        const open = wrap.classList.toggle('open');
+        row.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      wrap.appendChild(row);
+      wrap.appendChild(detail);
+      recentBox.appendChild(wrap);
+    });
   }
 })();
