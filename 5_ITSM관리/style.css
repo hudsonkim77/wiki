@@ -68,6 +68,9 @@ body {
 }
 
 .navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 16px;
   font-weight: 600;
   color: var(--text-primary);
@@ -76,6 +79,12 @@ body {
 
 .navbar .brand:hover {
   color: var(--text-secondary);
+}
+
+.navbar .brand-mark {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 .nav-buttons {
@@ -323,15 +332,56 @@ main {
   margin-bottom: 4px;
 }
 
-/* ---------- 하단 푸터: 정책 링크 ---------- */
+/* ---------- 경영관리 업무보고 링크 ---------- */
+.report-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.report-links a {
+  font-size: 13px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.report-links a::before {
+  content: "↗ ";
+  color: var(--text-muted);
+}
+
+.report-links a:hover {
+  color: var(--series-2);
+  text-decoration: underline;
+}
+
+/* ---------- 하단 푸터: 로고 + 정책 링크 ---------- */
 footer {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 16px 24px 32px;
+  padding: 20px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.footer-logo {
+  height: 34px;
+  width: auto;
+  background: #e2dcd0;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.footer-links {
   display: flex;
   gap: 20px;
   justify-content: center;
-  font-size: 12px;
 }
 
 footer a {

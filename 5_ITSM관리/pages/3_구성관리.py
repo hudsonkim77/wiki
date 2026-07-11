@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parent.parent
 STYLE_CSS = ROOT / "style.css"
 CI_HTML = ROOT / "구성관리.html"
 
+st.logo(str(ROOT / "assets" / "logo-full-flat.png"), icon_image=str(ROOT / "assets" / "logo-mark-flat.png"))
+
 st.title("구성관리")
 
 

@@ -89,3 +89,4 @@ CHANGE (변경관리) 1 ──< INCIDENT (장애관리)   * 변경이 유발한 
 | 2026-07-11 | 이 문서의 ERD 요약(위 "데이터 모델 및 연관관계")을 [5_ITSM관리](../5_ITSM관리/README.md) `구성관리.html` 하단에 SVG+HTML 다이어그램으로 시각화. `CFG_WEB_019`~`022`의 `CHG_TICKET_ID`를 `CHG_20260711_003`으로 갱신 | Claude |
 | 2026-07-11 | 홈 대시보드 최근 사항 3건 기능 추가로 `CFG_WEB_019`의 `CHG_TICKET_ID`를 `CHG_20260711_004`로 갱신 | Claude |
 | 2026-07-11 | Streamlit 구성관리 페이지 임베딩 작업으로 `CFG_WEB_022`의 `CHG_TICKET_ID`를 `CHG_20260711_005`로 갱신 | Claude |
+| 2026-07-11 | 로고 반영 작업으로 `CFG_WEB_019`~`022`의 `CHG_TICKET_ID`를 `CHG_20260711_007`로 갱신 | Claude |

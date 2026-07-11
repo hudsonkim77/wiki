@@ -43,6 +43,7 @@ CATEGORY_LABELS_KO = {
 }
 
 st.set_page_config(page_title="ITSM 통합관리대시보드", layout="wide")
+st.logo(str(ROOT / "5_ITSM관리" / "assets" / "logo-full-flat.png"), icon_image=str(ROOT / "5_ITSM관리" / "assets" / "logo-mark-flat.png"))
 
 ci_df = pd.read_csv(CI_CSV)
 change_df = pd.read_csv(CHANGE_CSV)
@@ -123,7 +124,19 @@ if len(incident_df):
 else:
     st.caption("🔴 장애 · 이력 없음")
 
+st.subheader("경영관리 업무보고")
+st.markdown(
+    "- [IT 자산 현황 브리핑](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/_업무보고/20260711_IT자산_현황_브리핑.pdf)\n"
+    "- [데이터 모델 ERD 보고](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/_업무보고/20260711_2주차_데이터모델ERD보고.pdf)\n"
+    "- [장애관리대장](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/_업무보고/20260711_장애관리대장.pdf)\n"
+    "- [경위서 — ITSM 통합관리대시보드 서비스 장애](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/_업무보고/20260711_경위서_ITSM대시보드장애.pdf)"
+)
+
 st.divider()
+_, footer_logo_col, _ = st.columns([2, 1, 2])
+with footer_logo_col:
+    st.image(str(ROOT / "5_ITSM관리" / "assets" / "logo-full-flat.png"))
+
 footer_col1, footer_col2 = st.columns([1, 1])
 with footer_col1:
     if st.button("개인정보처리방침"):
