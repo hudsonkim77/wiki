@@ -5,38 +5,52 @@
   document.getElementById('total-assets').textContent = data.totalAssets.toLocaleString();
   document.getElementById('snapshot-date').textContent = data.snapshotDate;
 
-  // ---- 카테고리별 막대바 (카테고리마다 다른 색, 8색 순환) ----
-  const chart = document.getElementById('category-bar-chart');
-  const maxCount = Math.max(...data.assetsByCategory.map((d) => d.count));
-  const CAT_COLORS = 8;
+  // ---- 카테고리별 막대바 (Chart.js, 관제형 단일 앰버 그라데이션) ----
+  const rootStyle = getComputedStyle(document.documentElement);
+  const accentColor = rootStyle.getPropertyValue('--accent').trim();
+  const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim();
 
-  data.assetsByCategory.forEach((d, i) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
+  const sortedCategories = [...data.assetsByCategory].sort((a, b) => b.count - a.count);
+  const canvas = document.getElementById('category-bar-chart');
+  canvas.parentElement.style.height = `${28 * sortedCategories.length + 16}px`;
 
-    const displayLabel = d.label || d.category;
-    const label = document.createElement('div');
-    label.className = 'bar-label';
-    label.textContent = displayLabel;
-    label.title = displayLabel;
+  const ctx = canvas.getContext('2d');
+  const barGradient = ctx.createLinearGradient(0, 0, canvas.parentElement.clientWidth || 600, 0);
+  barGradient.addColorStop(0, accentColor);
+  barGradient.addColorStop(1, '#ffc27a');
 
-    const track = document.createElement('div');
-    track.className = 'bar-track';
-
-    const fill = document.createElement('div');
-    fill.className = 'bar-fill';
-    fill.style.width = `${(d.count / maxCount) * 100}%`;
-    fill.style.background = `var(--cat-${(i % CAT_COLORS) + 1})`;
-    track.appendChild(fill);
-
-    const value = document.createElement('div');
-    value.className = 'bar-value';
-    value.textContent = d.count.toLocaleString();
-
-    row.appendChild(label);
-    row.appendChild(track);
-    row.appendChild(value);
-    chart.appendChild(row);
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: sortedCategories.map((d) => d.label || d.category),
+      datasets: [{
+        data: sortedCategories.map((d) => d.count),
+        backgroundColor: barGradient,
+        borderRadius: 6,
+        barPercentage: 0.7,
+      }],
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 700, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `자산수: ${ctx.formattedValue}건`,
+          },
+        },
+      },
+      scales: {
+        x: { display: false },
+        y: {
+          ticks: { color: textSecondary, font: { size: 12 } },
+          grid: { display: false },
+        },
+      },
+    },
   });
 
   // ---- 하단 현황 스코어보드 ----
@@ -55,6 +69,7 @@
     const accent = document.createElement('div');
     accent.className = 'accent';
     accent.style.background = t.accent;
+    accent.style.color = t.accent;
 
     const value = document.createElement('div');
     value.className = 'value';
@@ -92,7 +107,8 @@
 
       const accent = document.createElement('span');
       accent.className = 'recent-item-badge';
-      accent.style.background = `var(--${item.accent})`;
+      accent.style.background = `color-mix(in srgb, var(--${item.accent}) 22%, transparent)`;
+      accent.style.color = `var(--${item.accent})`;
       accent.textContent = item.type;
 
       const title = document.createElement('span');

@@ -1,0 +1,8 @@
+# 경영진 관제형(Control-room) 디자인 기조 — 정적 HTML(style.css)과 톤 통일.
+[theme]
+base = "dark"
+primaryColor = "#ff9f45"
+backgroundColor = "#14161a"
+secondaryBackgroundColor = "#1b1e23"
+textColor = "#edeef0"
+font = "sans serif"

@@ -1,50 +1,33 @@
+/* 경영진 관제형(Control-room) — 이사님 피드백 반영해 확정한 디자인 기조.
+   의도적으로 단일 다크 테마로 고정(OS 라이트 설정과 무관). 향후 신규 페이지도 이 톤 유지. */
 :root {
-  --page-plane:      #f9f9f7;
-  --surface-1:       #fcfcfb;
-  --text-primary:    #0b0b0b;
-  --text-secondary:  #52514e;
-  --text-muted:      #898781;
-  --gridline:        #e1e0d9;
-  --baseline:        #c3c2b7;
-  --border:          rgba(11,11,11,0.22);
-  --series-2:        #1baf7a; /* aqua - 변경건수 */
-  --series-3:        #e34948; /* red  - 장애건수 */
-  --series-4:        #eda100; /* yellow - 구성관리 추가 */
-  --series-5:        #4a3aa7; /* violet - 구성관리 삭제 */
-  /* 카테고리별 막대바 색상(8색 순환) */
-  --cat-1: #2a78d6; /* blue */
-  --cat-2: #1baf7a; /* aqua */
-  --cat-3: #eda100; /* yellow */
-  --cat-4: #008300; /* green */
-  --cat-5: #4a3aa7; /* violet */
-  --cat-6: #e34948; /* red */
-  --cat-7: #e87ba4; /* magenta */
-  --cat-8: #eb6834; /* orange */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --page-plane:     #0d0d0d;
-    --surface-1:      #1a1a19;
-    --text-primary:   #ffffff;
-    --text-secondary: #c3c2b7;
-    --text-muted:     #898781;
-    --gridline:       #2c2c2a;
-    --baseline:       #383835;
-    --border:         rgba(255,255,255,0.24);
-    --series-2:       #199e70;
-    --series-3:       #e66767;
-    --series-4:       #c98500;
-    --series-5:       #9085e9;
-    --cat-1: #3987e5;
-    --cat-2: #199e70;
-    --cat-3: #c98500;
-    --cat-4: #008300;
-    --cat-5: #9085e9;
-    --cat-6: #e66767;
-    --cat-7: #d55181;
-    --cat-8: #d95926;
-  }
+  --page-plane:      #14161a;
+  --surface-1:       #1b1e23;
+  --surface-2:       #21252b;
+  --text-primary:    #edeef0;
+  --text-secondary:  #a7acb3;
+  --text-muted:      #767c85;
+  --gridline:        #2a2e35;
+  --baseline:        #363b42;
+  --border:          rgba(255,255,255,0.08);
+  --accent:          #ff9f45; /* 관제 액센트(경고등 앰버) — 인터랙션/주요 강조 전용 */
+  --accent-soft:     rgba(255,159,69,0.14);
+  --good:            #33c29d;
+  --warn:            #e8b93e;
+  --crit:            #ff5c5c;
+  --series-2:        #ff9f45; /* 변경건수 */
+  --series-3:        #ff5c5c; /* 장애건수 */
+  --series-4:        #e8b93e; /* 구성관리 추가 */
+  --series-5:        #8b9098; /* 구성관리 삭제 */
+  /* 5층 건물 시각화 전용 색(층 구분용 — 액센트와 별개, 기능적 구분이 목적) */
+  --cat-1: #3987e5;
+  --cat-2: #33c29d;
+  --cat-3: #e8b93e;
+  --cat-4: #4caf50;
+  --cat-5: #9085e9;
+  --cat-6: #ff5c5c;
+  --cat-7: #d55181;
+  --cat-8: #ff9f45;
 }
 
 * { box-sizing: border-box; }
@@ -110,13 +93,14 @@ body {
 }
 
 .nav-buttons button:hover {
-  background: var(--gridline);
+  background: var(--accent-soft);
+  border-color: var(--accent);
 }
 
 .nav-buttons button.active {
-  background: var(--text-primary);
-  color: var(--surface-1);
-  border-color: var(--text-primary);
+  background: var(--accent);
+  color: #1a1206;
+  border-color: var(--accent);
 }
 
 /* ---------- 본문 레이아웃 ---------- */
@@ -134,14 +118,37 @@ main {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.panel:hover {
+  border-color: rgba(255,255,255,0.14);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .panel-title {
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
   text-align: left;
   margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 실시간 집계 패널에만 표시(정적 참고자료성 패널엔 붙이지 않음) */
+.panel-title--live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--good);
+  box-shadow: 0 0 8px var(--good);
+  flex: none;
 }
 
 /* ---------- 상단: 총 자산수 + 카테고리 막대 ---------- */
@@ -164,13 +171,22 @@ main {
 }
 
 .hero-figure .value {
-  font-size: 56px;
-  font-weight: 600;
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #ffffff, #c9ccd1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero-figure .label {
-  font-size: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--text-secondary);
 }
 
@@ -179,45 +195,9 @@ main {
   color: var(--text-muted);
 }
 
-.bar-chart {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.bar-row {
-  display: grid;
-  grid-template-columns: 150px 1fr 44px;
-  align-items: center;
-  gap: 8px;
-  height: 24px;
-}
-
-.bar-row .bar-label {
-  font-size: 12px;
-  color: var(--text-secondary);
-  text-align: right;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.bar-track {
+.chart-wrap {
   position: relative;
-  height: 16px;
-  background: transparent;
-}
-
-.bar-fill {
-  height: 16px;
-  background: var(--cat-1);
-  border-radius: 4px;
-}
-
-.bar-row .bar-value {
-  font-size: 12px;
-  color: var(--text-secondary);
-  font-variant-numeric: tabular-nums;
+  width: 100%;
 }
 
 /* ---------- 하단: 현황 스코어보드 ---------- */
@@ -232,27 +212,39 @@ main {
 }
 
 .stat-tile {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 16px;
+  padding: 14px 16px 14px 20px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .stat-tile .accent {
-  width: 28px;
-  height: 4px;
-  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 0;
+  box-shadow: 0 0 12px currentColor;
 }
 
 .stat-tile .value {
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-tile .label {
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-secondary);
 }
 
@@ -269,9 +261,11 @@ main {
 }
 
 .recent-item {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.recent-item:last-child {
+  border-bottom: none;
 }
 
 .recent-item-row {
@@ -279,7 +273,7 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
+  padding: 10px 4px;
   background: transparent;
   border: none;
   font: inherit;
@@ -289,16 +283,15 @@ main {
 }
 
 .recent-item-row:hover {
-  background: var(--gridline);
+  background: var(--accent-soft);
 }
 
 .recent-item-badge {
   flex: none;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  color: #fff;
-  padding: 3px 8px;
-  border-radius: 999px;
+  padding: 2px 7px;
+  border-radius: 4px;
 }
 
 .recent-item-title {
@@ -359,7 +352,7 @@ main {
 }
 
 .report-links a:hover {
-  color: var(--series-2);
+  color: var(--accent);
   text-decoration: underline;
 }
 

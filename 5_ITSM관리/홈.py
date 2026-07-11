@@ -1,8 +1,8 @@
 import sys
 from pathlib import Path
 
-import altair as alt
 import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -24,10 +24,10 @@ def show_privacy_policy():
     st.markdown(PRIVACY_POLICY_MD.read_text(encoding="utf-8"))
 
 
-CAT_COLORS = [
-    "#2a78d6", "#1baf7a", "#eda100", "#008300",
-    "#4a3aa7", "#e34948", "#e87ba4", "#eb6834",
-]
+# 경영진 관제형(Control-room) 디자인 기조 — 단일 앰버 액센트(카테고리별 무지개색 대신
+# 정적 HTML(style.css --accent)과 통일된 그라데이션 사용).
+ACCENT_START = "#ff9f45"
+ACCENT_END = "#ffc27a"
 
 st.set_page_config(page_title="ITSM 통합관리대시보드", layout="wide")
 
@@ -47,54 +47,78 @@ def render_home():
     col_total, col_chart = st.columns([1, 2])
 
     with col_total:
-        st.metric("총 자산수", f"{len(ci_df):,}")
-        st.caption("3_구성관리/CI.csv 기준")
+        with st.container(border=True):
+            st.metric("총 자산수", f"{len(ci_df):,}")
+            st.caption("3_구성관리/CI.csv 기준")
 
     with col_chart:
-        st.markdown("**카테고리별 자산 현황**")
-        cat_counts = (
-            ci_df["CI_CATEGORY"]
-            .value_counts()
-            .rename_axis("category")
-            .reset_index(name="count")
-            .sort_values("count", ascending=False)
-        )
-        cat_counts["category_ko"] = cat_counts["category"].map(CATEGORY_LABELS_KO).fillna(cat_counts["category"])
-        categories_ko = cat_counts["category_ko"].tolist()
-        colors = [CAT_COLORS[i % len(CAT_COLORS)] for i in range(len(categories_ko))]
-
-        bars = (
-            alt.Chart(cat_counts)
-            .mark_bar(cornerRadiusTopRight=4, cornerRadiusBottomRight=4, size=16)
-            .encode(
-                y=alt.Y("category_ko:N", sort=categories_ko, title=None),
-                x=alt.X("count:Q", title=None),
-                color=alt.Color(
-                    "category_ko:N",
-                    scale=alt.Scale(domain=categories_ko, range=colors),
-                    legend=None,
-                ),
-                tooltip=[alt.Tooltip("category_ko:N", title="카테고리"), alt.Tooltip("count:Q", title="자산수")],
+        with st.container(border=True):
+            st.markdown("**카테고리별 자산 현황**")
+            cat_counts = (
+                ci_df["CI_CATEGORY"]
+                .value_counts()
+                .rename_axis("category")
+                .reset_index(name="count")
+                .sort_values("count", ascending=True)
             )
-        )
-        labels = bars.mark_text(align="left", dx=4).encode(text="count:Q")
-        st.altair_chart(
-            (bars + labels).properties(height=28 * len(categories_ko)),
-            use_container_width=True,
-        )
+            cat_counts["category_ko"] = cat_counts["category"].map(CATEGORY_LABELS_KO).fillna(cat_counts["category"])
+            categories_ko = cat_counts["category_ko"].tolist()
+            n = max(len(categories_ko) - 1, 1)
+            start_rgb = tuple(int(ACCENT_START[i : i + 2], 16) for i in (1, 3, 5))
+            end_rgb = tuple(int(ACCENT_END[i : i + 2], 16) for i in (1, 3, 5))
+            colors = [
+                "#{:02x}{:02x}{:02x}".format(
+                    *(int(s + (e - s) * i / n) for s, e in zip(start_rgb, end_rgb))
+                )
+                for i in range(len(categories_ko))
+            ]
+
+            fig = go.Figure(
+                go.Bar(
+                    y=categories_ko,
+                    x=cat_counts["count"],
+                    orientation="h",
+                    marker=dict(color=colors, line=dict(width=0)),
+                    text=cat_counts["count"],
+                    textposition="outside",
+                    hovertemplate="<b>%{y}</b><br>자산수: %{x}건<extra></extra>",
+                )
+            )
+            fig.update_traces(marker_cornerradius=6)
+            fig.update_layout(
+                height=28 * len(categories_ko) + 40,
+                margin=dict(l=0, r=24, t=8, b=0),
+                xaxis=dict(visible=False),
+                yaxis=dict(title=None, color="#a7acb3"),
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                font=dict(size=12, color="#a7acb3"),
+                showlegend=False,
+                bargap=0.35,
+                transition=dict(duration=400, easing="cubic-in-out"),
+            )
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
     st.subheader("현황")
-    c1, c2, c3, c4 = st.columns(4)
     history_df = pd.read_csv(CI_HISTORY_CSV) if CI_HISTORY_CSV.exists() else pd.DataFrame(columns=["ACTION"])
     ci_added = int((history_df["ACTION"] == "ADDED").sum())
     ci_removed = int((history_df["ACTION"] == "REMOVED").sum())
 
-    c1.metric("변경건수", len(change_df))
-    c2.metric("장애건수", len(incident_df))
-    c3.metric("구성관리(추가)", ci_added)
-    c3.caption("3_구성관리/구성이력/CI_HISTORY.csv 기준")
-    c4.metric("구성관리(삭제)", ci_removed)
-    c4.caption("3_구성관리/구성이력/CI_HISTORY.csv 기준")
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        with st.container(border=True):
+            st.metric("변경건수", len(change_df))
+    with c2:
+        with st.container(border=True):
+            st.metric("장애건수", len(incident_df))
+    with c3:
+        with st.container(border=True):
+            st.metric("구성관리(추가)", ci_added)
+            st.caption("3_구성관리/구성이력/CI_HISTORY.csv 기준")
+    with c4:
+        with st.container(border=True):
+            st.metric("구성관리(삭제)", ci_removed)
+            st.caption("3_구성관리/구성이력/CI_HISTORY.csv 기준")
 
     st.subheader("최근 사항 3건")
 
