@@ -156,11 +156,23 @@ PAGES_DIR = ROOT / "5_ITSM관리" / "pages"
 # st.navigation()으로 사이드바 라벨을 파일명("홈")과 무관하게 직접 지정한다.
 # 이 함수를 쓰기 전에는 메인 스크립트가 항상 "홈"으로만 표시되어 "ITSM관리"로
 # 바꿔달라는 요청을 파일명 변경 없이 처리할 수 없었다(Main file path 설정 유지 필요).
+# 사이드바 메뉴를 wiki 저장소의 도메인 폴더 순서(1·2·3·6~15)와 1:1로 맞춘다
+# (2026-07-11 좌측 메뉴-폴더 구조 정합화 작업. 4_경영관리는 practice가 아닌 업무보고 화면이라 맨 끝에 유지).
 nav = st.navigation([
     st.Page(render_home, title="ITSM관리", icon="🏠", default=True),
     st.Page(str(PAGES_DIR / "1_변경관리.py"), title="변경관리"),
     st.Page(str(PAGES_DIR / "2_장애관리.py"), title="장애관리"),
     st.Page(str(PAGES_DIR / "3_구성관리.py"), title="구성관리"),
+    st.Page(str(PAGES_DIR / "6_문제관리.py"), title="문제관리"),
+    st.Page(str(PAGES_DIR / "7_배포관리.py"), title="배포관리"),
+    st.Page(str(PAGES_DIR / "8_요청관리.py"), title="요청관리"),
+    st.Page(str(PAGES_DIR / "9_서비스수준관리.py"), title="서비스수준관리"),
+    st.Page(str(PAGES_DIR / "10_형상관리.py"), title="형상관리"),
+    st.Page(str(PAGES_DIR / "11_운영상태관리.py"), title="운영상태관리"),
+    st.Page(str(PAGES_DIR / "12_이벤트관리.py"), title="이벤트관리"),
+    st.Page(str(PAGES_DIR / "13_테스트관리.py"), title="테스트관리"),
+    st.Page(str(PAGES_DIR / "14_연계관리.py"), title="연계관리"),
+    st.Page(str(PAGES_DIR / "15_백업관리.py"), title="백업관리"),
     st.Page(str(PAGES_DIR / "4_경영관리.py"), title="경영관리"),
 ])
 nav.run()
