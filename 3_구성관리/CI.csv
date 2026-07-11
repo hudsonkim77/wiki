@@ -1,54 +1,54 @@
 CI_ID,CI_NAME,HOST_NAME,CI_TYPE,CI_CATEGORY,DEPTH_LEVEL,PARENT_CI_ID,LOCATION_OR_URL,IP_ADDRESS,OS_VERSION,SERIAL_NUM,OWNER_TEAM,ADMIN_USER_ID,STATUS,INST_DT,CHG_TICKET_ID
-AST-SEC-007,Check Point Quantum 16200 (A),FW-INT-01A,Firewall,Network_Security,3,AST-NET-003,Rack-01-U29,10.254.3.1,Gaia R81.x,SN-CP162-001,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-008,Check Point Quantum 16200 (B),FW-INT-01B,Firewall,Network_Security,3,AST-NET-004,Rack-02-U29,10.254.3.2,Gaia R81.x,SN-CP162-002,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-011,Cisco Catalyst 9300 (DMZ SW-A),SW-DMZ-01A,Switch,Network_Equipment,3,AST-NET-003,Rack-01-U21,10.254.2.11,Cisco IOS-XE,SN-CS9300-01,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-012,Cisco Catalyst 9300 (DMZ SW-B),SW-DMZ-01B,Switch,Network_Equipment,3,AST-NET-004,Rack-02-U21,10.254.2.12,Cisco IOS-XE,SN-CS9300-02,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-013,Cisco Catalyst 9300 (SOL SW-A),SW-SOL-01A,Switch,Network_Equipment,3,AST-NET-003,Rack-01-U19,10.254.3.11,Cisco IOS-XE,SN-CS9300-03,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-014,Cisco Catalyst 9300 (SOL SW-B),SW-SOL-01B,Switch,Network_Equipment,3,AST-NET-004,Rack-02-U19,10.254.3.12,Cisco IOS-XE,SN-CS9300-04,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-015,Cisco Catalyst 9300 (TAP SW-A),SW-TAP-01A,Switch,Network_Equipment,3,AST-NET-003,Rack-01-U17,10.254.4.11,Cisco IOS-XE,SN-CS9300-05,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-016,Cisco Catalyst 9300 (TAP SW-B),SW-TAP-01B,Switch,Network_Equipment,3,AST-NET-004,Rack-02-U17,10.254.4.12,Cisco IOS-XE,SN-CS9300-06,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-019,Citrix ADC NetScaler (L4/L7-A),LB-EXT-01A,Load_Balancer,Network_Equipment,3,AST-SEC-001,Rack-01-U15,10.254.1.10,NetScaler OS,SN-CTX-LB01,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-020,Citrix ADC NetScaler (L4/L7-B),LB-EXT-01B,Load_Balancer,Network_Equipment,3,AST-SEC-002,Rack-02-U15,10.254.1.20,NetScaler OS,SN-CTX-LB02,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-017,Dell PowerEdge R360 (Console-A),MGT-CON-01A,Server,Security_Management,4,AST-SEC-013,Rack-04-U19,10.254.254.1,RHEL 9.x,SN-DELL-CON01,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SEC-018,Dell PowerEdge R360 (Console-B),MGT-CON-01B,Server,Security_Management,4,AST-SEC-014,Rack-04-U20,10.254.254.2,RHEL 9.x,SN-DELL-CON02,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-005,Dell PowerEdge R760 (DRM DB-A),DRM-DB-01A,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U05,10.200.1.15,RHEL 9.x,SN-DRM-DB01A,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-006,Dell PowerEdge R760 (DRM DB-B),DRM-DB-01B,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U06,10.200.1.16,RHEL 9.x,SN-DRM-DB01B,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-003,HPE ProLiant DL360 Gen11 (DRM Key),DRM-KEY-01A,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U03,10.200.1.13,RHEL 9.x,SN-DRM-KEY01A,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-004,HPE ProLiant DL360 Gen11 (DRM Key),DRM-KEY-01B,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U04,10.200.1.14,RHEL 9.x,SN-DRM-KEY01B,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-001,Dell PowerEdge R760 (DRM Main-A),DRM-MGT-01A,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U01,10.200.1.11,Windows 2022,SN-DRM-MGT01A,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-002,Dell PowerEdge R760 (DRM Main-B),DRM-MGT-01B,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U02,10.200.1.12,Windows 2022,SN-DRM-MGT01B,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SEC-005,F5 BIG-IP Advanced WAF (A),WAF-DMZ-01A,WAF,Network_Security,4,AST-SEC-011,Rack-01-U31,10.254.2.1,TMOS 17.x,SN-F5WAF-001,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-006,F5 BIG-IP Advanced WAF (B),WAF-DMZ-01B,WAF,Network_Security,4,AST-SEC-012,Rack-02-U31,10.254.2.2,TMOS 17.x,SN-F5WAF-002,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-003,Fortinet FortiGate 400F (A),IPS-EXT-01A,IPS,Network_Security,3,AST-SEC-001,Rack-01-U33,10.254.1.3,FortiOS 7.x,SN-FG400F-001,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-004,Fortinet FortiGate 400F (B),IPS-EXT-01B,IPS,Network_Security,3,AST-SEC-002,Rack-02-U33,10.254.1.4,FortiOS 7.x,SN-FG400F-002,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-001,Palo Alto PA-5450 (Active-A),FW-EXT-01A,Firewall,Network_Security,3,AST-NET-003,Rack-01-U35,10.254.1.1,PAN-OS 11.x,SN-PA5450-001,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-002,Palo Alto PA-5450 (Active-B),FW-EXT-01B,Firewall,Network_Security,3,AST-NET-004,Rack-02-U35,10.254.1.2,PAN-OS 11.x,SN-PA5450-002,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-009,Pulse Secure PSA5000 (A),VPN-SSL-01A,VPN,Network_Security,3,AST-SEC-001,Rack-01-U27,10.254.1.5,PCS OS 9.x,SN-PULSE-001,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SEC-010,Pulse Secure PSA5000 (B),VPN-SSL-01B,VPN,Network_Security,3,AST-SEC-002,Rack-02-U27,10.254.1.6,PCS OS 9.x,SN-PULSE-002,Security_Team,admin_sec,Active,2026-03-15,CHG-2026-001
-AST-SOL-009,Dell PowerEdge R660 (AM-A),SEC-AM-01A,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U09,10.200.1.31,RHEL 9.x,SN-SEC-AM01A,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-010,Dell PowerEdge R660 (AM-B),SEC-AM-01B,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U10,10.200.1.32,RHEL 9.x,SN-SEC-AM01B,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-013,Dell PowerEdge R660 (DBAC),SEC-DBAC-01,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U13,10.200.1.51,RHEL 9.x,SN-SEC-DBAC01,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-008,HPE ProLiant DL360 Gen11 (DLP),SEC-DLP-01,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U08,10.200.1.22,Windows 2022,SN-SEC-DLP01,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-007,HPE ProLiant DL360 Gen11 (PMS),SEC-PMS-01,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U07,10.200.1.21,Windows 2022,SN-SEC-PMS01,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-011,HPE ProLiant DL360 Gen11 (SIEM),SEC-SIEM-01,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U11,10.200.1.41,RHEL 9.x,SN-SEC-SIEM01,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-014,Dell PowerEdge R660 (SOC),SEC-SOC-01,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U14,10.200.1.52,RHEL 9.x,SN-SEC-SOC01,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-012,HPE ProLiant DL360 Gen11 (SSO),SEC-SSO-01,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U12,10.200.1.42,Windows 2022,SN-SEC-SSO01,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-SOL-015,HPE ProLiant DL360 Gen11 (VDIGW),SEC-VDIGW-01,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U15,10.200.1.61,RHEL 9.x,SN-SEC-VDI01,Security_Team,admin_sec,Active,2026-03-25,CHG-2026-003
-AST-DMZ-005,Dell PowerEdge R660,FEP-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U05,10.100.1.21,Windows 2022,SN-DELL-FEP01,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-006,Dell PowerEdge R660,FEP-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U06,10.100.1.22,Windows 2022,SN-DELL-FEP02,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-009,Dell PowerEdge R660,FTP-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U09,10.100.1.41,RHEL 9.x,SN-DELL-FTP01,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-010,Dell PowerEdge R660,FTP-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U10,10.100.1.42,RHEL 9.x,SN-DELL-FTP02,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-013,Dell PowerEdge R660,SSL-ACC-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U13,10.100.1.61,RHEL 9.x,SN-DELL-SSL01,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-014,Dell PowerEdge R660,SSL-ACC-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U14,10.100.1.62,RHEL 9.x,SN-DELL-SSL02,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-007,HPE ProLiant DL360 Gen11,DNS-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U07,10.100.1.31,RHEL 9.x,SN-HPE-DNS01,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-008,HPE ProLiant DL360 Gen11,DNS-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U08,10.100.1.32,RHEL 9.x,SN-HPE-DNS02,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-011,HPE ProLiant DL360 Gen11,APIGW-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U11,10.100.1.51,RHEL 9.x,SN-HPE-GW01,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-012,HPE ProLiant DL360 Gen11,APIGW-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U12,10.100.1.52,RHEL 9.x,SN-HPE-GW02,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-015,HPE ProLiant DL360 Gen11,MAIL-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U15,10.100.1.71,RHEL 9.x,SN-HPE-MAIL01,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-001,HPE ProLiant DL360 Gen11,WEB-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U01,10.100.1.11,RHEL 9.x,SN-HPE-WEB01,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-002,HPE ProLiant DL360 Gen11,WEB-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U02,10.100.1.12,RHEL 9.x,SN-HPE-WEB02,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-003,HPE ProLiant DL360 Gen11,WEB-SRV-03,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U03,10.100.1.13,RHEL 9.x,SN-HPE-WEB03,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
-AST-DMZ-004,HPE ProLiant DL360 Gen11,WEB-SRV-04,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U04,10.100.1.14,RHEL 9.x,SN-HPE-WEB04,Infra_Team,user_infra,Active,2026-03-20,CHG-2026-002
+AST-SEC-007,Check Point Quantum 16200 (A),FW-INT-01A,Firewall,Network_Security,3,AST-NET-003,Rack-01-U29,10.254.3.1,Gaia R81.x,SN-CP162-001,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-008,Check Point Quantum 16200 (B),FW-INT-01B,Firewall,Network_Security,3,AST-NET-004,Rack-02-U29,10.254.3.2,Gaia R81.x,SN-CP162-002,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-011,Cisco Catalyst 9300 (DMZ SW-A),SW-DMZ-01A,Switch,Network_Equipment,3,AST-NET-003,Rack-01-U21,10.254.2.11,Cisco IOS-XE,SN-CS9300-01,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-012,Cisco Catalyst 9300 (DMZ SW-B),SW-DMZ-01B,Switch,Network_Equipment,3,AST-NET-004,Rack-02-U21,10.254.2.12,Cisco IOS-XE,SN-CS9300-02,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-013,Cisco Catalyst 9300 (SOL SW-A),SW-SOL-01A,Switch,Network_Equipment,3,AST-NET-003,Rack-01-U19,10.254.3.11,Cisco IOS-XE,SN-CS9300-03,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-014,Cisco Catalyst 9300 (SOL SW-B),SW-SOL-01B,Switch,Network_Equipment,3,AST-NET-004,Rack-02-U19,10.254.3.12,Cisco IOS-XE,SN-CS9300-04,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-015,Cisco Catalyst 9300 (TAP SW-A),SW-TAP-01A,Switch,Network_Equipment,3,AST-NET-003,Rack-01-U17,10.254.4.11,Cisco IOS-XE,SN-CS9300-05,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-016,Cisco Catalyst 9300 (TAP SW-B),SW-TAP-01B,Switch,Network_Equipment,3,AST-NET-004,Rack-02-U17,10.254.4.12,Cisco IOS-XE,SN-CS9300-06,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-019,Citrix ADC NetScaler (L4/L7-A),LB-EXT-01A,Load_Balancer,Network_Equipment,3,AST-SEC-001,Rack-01-U15,10.254.1.10,NetScaler OS,SN-CTX-LB01,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-020,Citrix ADC NetScaler (L4/L7-B),LB-EXT-01B,Load_Balancer,Network_Equipment,3,AST-SEC-002,Rack-02-U15,10.254.1.20,NetScaler OS,SN-CTX-LB02,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-017,Dell PowerEdge R360 (Console-A),MGT-CON-01A,Server,Security_Management,4,AST-SEC-013,Rack-04-U19,10.254.254.1,RHEL 9.x,SN-DELL-CON01,Security_Team,admin_sec,Active,2026-03-25,
+AST-SEC-018,Dell PowerEdge R360 (Console-B),MGT-CON-01B,Server,Security_Management,4,AST-SEC-014,Rack-04-U20,10.254.254.2,RHEL 9.x,SN-DELL-CON02,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-005,Dell PowerEdge R760 (DRM DB-A),DRM-DB-01A,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U05,10.200.1.15,RHEL 9.x,SN-DRM-DB01A,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-006,Dell PowerEdge R760 (DRM DB-B),DRM-DB-01B,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U06,10.200.1.16,RHEL 9.x,SN-DRM-DB01B,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-003,HPE ProLiant DL360 Gen11 (DRM Key),DRM-KEY-01A,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U03,10.200.1.13,RHEL 9.x,SN-DRM-KEY01A,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-004,HPE ProLiant DL360 Gen11 (DRM Key),DRM-KEY-01B,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U04,10.200.1.14,RHEL 9.x,SN-DRM-KEY01B,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-001,Dell PowerEdge R760 (DRM Main-A),DRM-MGT-01A,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U01,10.200.1.11,Windows 2022,SN-DRM-MGT01A,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-002,Dell PowerEdge R760 (DRM Main-B),DRM-MGT-01B,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U02,10.200.1.12,Windows 2022,SN-DRM-MGT01B,Security_Team,admin_sec,Active,2026-03-25,
+AST-SEC-005,F5 BIG-IP Advanced WAF (A),WAF-DMZ-01A,WAF,Network_Security,4,AST-SEC-011,Rack-01-U31,10.254.2.1,TMOS 17.x,SN-F5WAF-001,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-006,F5 BIG-IP Advanced WAF (B),WAF-DMZ-01B,WAF,Network_Security,4,AST-SEC-012,Rack-02-U31,10.254.2.2,TMOS 17.x,SN-F5WAF-002,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-003,Fortinet FortiGate 400F (A),IPS-EXT-01A,IPS,Network_Security,3,AST-SEC-001,Rack-01-U33,10.254.1.3,FortiOS 7.x,SN-FG400F-001,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-004,Fortinet FortiGate 400F (B),IPS-EXT-01B,IPS,Network_Security,3,AST-SEC-002,Rack-02-U33,10.254.1.4,FortiOS 7.x,SN-FG400F-002,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-001,Palo Alto PA-5450 (Active-A),FW-EXT-01A,Firewall,Network_Security,3,AST-NET-003,Rack-01-U35,10.254.1.1,PAN-OS 11.x,SN-PA5450-001,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-002,Palo Alto PA-5450 (Active-B),FW-EXT-01B,Firewall,Network_Security,3,AST-NET-004,Rack-02-U35,10.254.1.2,PAN-OS 11.x,SN-PA5450-002,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-009,Pulse Secure PSA5000 (A),VPN-SSL-01A,VPN,Network_Security,3,AST-SEC-001,Rack-01-U27,10.254.1.5,PCS OS 9.x,SN-PULSE-001,Security_Team,admin_sec,Active,2026-03-15,
+AST-SEC-010,Pulse Secure PSA5000 (B),VPN-SSL-01B,VPN,Network_Security,3,AST-SEC-002,Rack-02-U27,10.254.1.6,PCS OS 9.x,SN-PULSE-002,Security_Team,admin_sec,Active,2026-03-15,
+AST-SOL-009,Dell PowerEdge R660 (AM-A),SEC-AM-01A,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U09,10.200.1.31,RHEL 9.x,SN-SEC-AM01A,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-010,Dell PowerEdge R660 (AM-B),SEC-AM-01B,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U10,10.200.1.32,RHEL 9.x,SN-SEC-AM01B,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-013,Dell PowerEdge R660 (DBAC),SEC-DBAC-01,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U13,10.200.1.51,RHEL 9.x,SN-SEC-DBAC01,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-008,HPE ProLiant DL360 Gen11 (DLP),SEC-DLP-01,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U08,10.200.1.22,Windows 2022,SN-SEC-DLP01,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-007,HPE ProLiant DL360 Gen11 (PMS),SEC-PMS-01,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U07,10.200.1.21,Windows 2022,SN-SEC-PMS01,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-011,HPE ProLiant DL360 Gen11 (SIEM),SEC-SIEM-01,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U11,10.200.1.41,RHEL 9.x,SN-SEC-SIEM01,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-014,Dell PowerEdge R660 (SOC),SEC-SOC-01,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U14,10.200.1.52,RHEL 9.x,SN-SEC-SOC01,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-012,HPE ProLiant DL360 Gen11 (SSO),SEC-SSO-01,Server,Internal_Security_Sol,4,AST-SEC-014,Rack-04-U12,10.200.1.42,Windows 2022,SN-SEC-SSO01,Security_Team,admin_sec,Active,2026-03-25,
+AST-SOL-015,HPE ProLiant DL360 Gen11 (VDIGW),SEC-VDIGW-01,Server,Internal_Security_Sol,4,AST-SEC-013,Rack-04-U15,10.200.1.61,RHEL 9.x,SN-SEC-VDI01,Security_Team,admin_sec,Active,2026-03-25,
+AST-DMZ-005,Dell PowerEdge R660,FEP-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U05,10.100.1.21,Windows 2022,SN-DELL-FEP01,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-006,Dell PowerEdge R660,FEP-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U06,10.100.1.22,Windows 2022,SN-DELL-FEP02,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-009,Dell PowerEdge R660,FTP-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U09,10.100.1.41,RHEL 9.x,SN-DELL-FTP01,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-010,Dell PowerEdge R660,FTP-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U10,10.100.1.42,RHEL 9.x,SN-DELL-FTP02,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-013,Dell PowerEdge R660,SSL-ACC-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U13,10.100.1.61,RHEL 9.x,SN-DELL-SSL01,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-014,Dell PowerEdge R660,SSL-ACC-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U14,10.100.1.62,RHEL 9.x,SN-DELL-SSL02,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-007,HPE ProLiant DL360 Gen11,DNS-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U07,10.100.1.31,RHEL 9.x,SN-HPE-DNS01,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-008,HPE ProLiant DL360 Gen11,DNS-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U08,10.100.1.32,RHEL 9.x,SN-HPE-DNS02,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-011,HPE ProLiant DL360 Gen11,APIGW-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U11,10.100.1.51,RHEL 9.x,SN-HPE-GW01,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-012,HPE ProLiant DL360 Gen11,APIGW-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U12,10.100.1.52,RHEL 9.x,SN-HPE-GW02,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-015,HPE ProLiant DL360 Gen11,MAIL-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U15,10.100.1.71,RHEL 9.x,SN-HPE-MAIL01,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-001,HPE ProLiant DL360 Gen11,WEB-SRV-01,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U01,10.100.1.11,RHEL 9.x,SN-HPE-WEB01,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-002,HPE ProLiant DL360 Gen11,WEB-SRV-02,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U02,10.100.1.12,RHEL 9.x,SN-HPE-WEB02,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-003,HPE ProLiant DL360 Gen11,WEB-SRV-03,Server,DMZ_Compute,4,AST-SEC-011,Rack-03-U03,10.100.1.13,RHEL 9.x,SN-HPE-WEB03,Infra_Team,user_infra,Active,2026-03-20,
+AST-DMZ-004,HPE ProLiant DL360 Gen11,WEB-SRV-04,Server,DMZ_Compute,4,AST-SEC-012,Rack-03-U04,10.100.1.14,RHEL 9.x,SN-HPE-WEB04,Infra_Team,user_infra,Active,2026-03-20,
 CFG_USR_019,AI융합사업팀 사원 한지민,,HUMAN,Staff,0,,본관 4층 사업기획실,,,,AI융합사업팀,USR_006,OPERATIONAL,2026-01-01 9:00,
 CFG_USR_020,AI융합사업팀 사원 강민재,,HUMAN,Staff,0,,본관 4층 사업기획실,,,,AI융합사업팀,USR_006,OPERATIONAL,2026-01-01 9:00,
 CFG_USR_012,AI융합사업팀 책임 서태웅,,HUMAN,Staff,0,,본관 4층 사업기획실,,,,AI융합사업팀,USR_006,OPERATIONAL,2026-01-01 9:00,
@@ -85,8 +85,8 @@ CFG_NET_005,DMZ 구간 L3 스위치 01,ai-dmzl3-01,NETWORK,Switch,0,,본관 3층
 CFG_NET_006,DMZ 구간 L3 스위치 02,ai-dmzl3-02,NETWORK,Switch,0,,본관 3층 전산실,10.140.5.2,Cisco IOS-XE,SN-NET-11226,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,
 CFG_NET_007,내부망 방화벽,ai-infw-01,NETWORK,Switch,0,,본관 3층 전산실,10.140.1.3,FortiOS v7.4,SN-NET-11227,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,
 CFG_NET_010,SSL-VPN 게이트웨이 장비,ai-vpn-01,NETWORK,Switch,0,,본관 3층 전산실,10.140.1.10,FortiOS v7.4,SN-NET-11230,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,
-CFG_SRV_001,대표홈페이지 WEB 서버 01,ai-web-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.11,CentOS Stream 9,SN-SRV-99812,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,CHG_20260302_001
-CFG_SRV_002,대표홈페이지 WEB 서버 02,ai-web-srv02,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.12,CentOS Stream 9,SN-SRV-99813,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,CHG_20260302_001
+CFG_SRV_001,대표홈페이지 WEB 서버 01,ai-web-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.11,CentOS Stream 9,SN-SRV-99812,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,
+CFG_SRV_002,대표홈페이지 WEB 서버 02,ai-web-srv02,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.12,CentOS Stream 9,SN-SRV-99813,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,
 CFG_SRV_007,행정지원통합 서버,ai-adm-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.30.11,Windows Server 2022,SN-SRV-99818,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,
 CFG_SRV_008,내부 공유 파일 서버,ai-nas-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.30.15,Ubuntu 22.04 LTS,SN-SRV-99819,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,
 CFG_SRV_013,공단 내부 그룹웨어 서버,ai-gw-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.30.12,Windows Server 2022,SN-SRV-99824,인프라운영팀,USR_003,OPERATIONAL,2026-01-15 9:00,
@@ -140,8 +140,8 @@ CFG_TER_032,부서용 고속 복합기 02,,HARDWARE,Peripheral,0,,본관 3층 OA
 CFG_TER_033,부서용 고속 복합기 03,,HARDWARE,Peripheral,0,,본관 2층 OA존,,Linux Embedded,SN-PRN-10003,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
 CFG_TER_034,가상화 PC 서버(VDI) 호스트 01,ai-vdi-host01,HARDWARE,Server,0,,본관 3층 전산실,10.140.60.11,VMware ESXi 8.0,SN-SRV-88101,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
 CFG_TER_035,가상화 PC 서버(VDI) 호스트 02,ai-vdi-host02,HARDWARE,Server,0,,본관 3층 전산실,10.140.60.12,VMware ESXi 8.0,SN-SRV-88102,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
-CFG_SRV_003,대표홈페이지 WAS 서버 01,ai-was-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.21,Rocky Linux 9.2,SN-SRV-99814,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,CHG_20260315_002
-CFG_SRV_004,대표홈페이지 WAS 서버 02,ai-was-srv02,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.22,Rocky Linux 9.2,SN-SRV-99815,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,CHG_20260315_002
+CFG_SRV_003,대표홈페이지 WAS 서버 01,ai-was-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.21,Rocky Linux 9.2,SN-SRV-99814,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
+CFG_SRV_004,대표홈페이지 WAS 서버 02,ai-was-srv02,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.22,Rocky Linux 9.2,SN-SRV-99815,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
 CFG_SRV_009,대표홈페이지 배치 서버,ai-bat-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.31,Rocky Linux 9.2,SN-SRV-99820,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
 CFG_SRV_014,사내 메일 서버,ai-mail-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.30.13,Rocky Linux 9.2,SN-SRV-99825,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
 CFG_SRV_017,백업 마스터 서버,ai-bck-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.20.51,RHEL 9.4,SN-SRV-99828,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
@@ -165,9 +165,9 @@ CFG_TER_062,가상화 VM 임직원 전용 자산 인덱스 27,vdi-win-027,HARDWA
 CFG_TER_063,가상화 VM 임직원 전용 자산 인덱스 28,vdi-win-028,HARDWARE,VM,0,CFG_TER_035,VDI 클러스터 B,,Windows 11 Ent,SN-VM-50128,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
 CFG_TER_064,가상화 VM 임직원 전용 자산 인덱스 29,vdi-win-029,HARDWARE,VM,0,CFG_TER_035,VDI 클러스터 B,,Windows 11 Ent,SN-VM-50129,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
 CFG_TER_065,가상화 VM 임직원 전용 자산 인덱스 30,vdi-win-030,HARDWARE,VM,0,CFG_TER_035,VDI 클러스터 B,,Windows 11 Ent,SN-VM-50130,인프라운영팀,USR_004,OPERATIONAL,2026-01-15 9:00,
-CFG_SRV_005,대표홈페이지 메인 DB 서버(Active),ai-db-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.20.11,RHEL 9.4,SN-SRV-99816,인프라운영팀,USR_005,OPERATIONAL,2026-01-15 9:00,CHG_20260410_001
-CFG_SRV_006,대표홈페이지 메인 DB 서버(Standby),ai-db-srv02,HARDWARE,Server,0,,본관 3층 전산실,10.140.20.12,RHEL 9.4,SN-SRV-99817,인프라운영팀,USR_005,STANDBY,2026-01-15 9:00,CHG_20260410_001
-CFG_SRV_010,대표홈페이지 연계 대외계 서버,ai-ext-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.41,RHEL 9.4,SN-SRV-99821,인프라운영팀,USR_005,OPERATIONAL,2026-01-15 9:00,CHG_20260611_002
+CFG_SRV_005,대표홈페이지 메인 DB 서버(Active),ai-db-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.20.11,RHEL 9.4,SN-SRV-99816,인프라운영팀,USR_005,OPERATIONAL,2026-01-15 9:00,
+CFG_SRV_006,대표홈페이지 메인 DB 서버(Standby),ai-db-srv02,HARDWARE,Server,0,,본관 3층 전산실,10.140.20.12,RHEL 9.4,SN-SRV-99817,인프라운영팀,USR_005,STANDBY,2026-01-15 9:00,
+CFG_SRV_010,대표홈페이지 연계 대외계 서버,ai-ext-srv01,HARDWARE,Server,0,,본관 3층 전산실,10.140.10.41,RHEL 9.4,SN-SRV-99821,인프라운영팀,USR_005,OPERATIONAL,2026-01-15 9:00,
 CFG_SRV_016,형상관리 및 자산관리 DB 서버,ai-cfg-db01,HARDWARE,Server,0,,본관 3층 전산실,10.140.20.21,PostgreSQL 16,SN-SRV-99827,인프라운영팀,USR_005,OPERATIONAL,2026-01-15 9:00,
 CFG_DEV_001,스토리지 스토어 인덱스 자산 01,,HARDWARE,Storage,0,,본관 3층 전산실,,SAN OS v1.2,SN-STG-201,인프라운영팀,USR_005,OPERATIONAL,2026-01-15 9:00,
 CFG_DEV_002,스토리지 스토어 인덱스 자산 02,,HARDWARE,Storage,0,,본관 3층 전산실,,SAN OS v1.2,SN-STG-202,인프라운영팀,USR_005,OPERATIONAL,2026-01-15 9:00,
@@ -293,8 +293,8 @@ CFG_WEB_003,공단소개 > 조직도,,WEB_PAGE,L2_PAGE,2,CFG_WEB_001,/intro/orga
 CFG_WEB_004,공단소개 > 오시는길,,WEB_PAGE,L2_PAGE,2,CFG_WEB_001,/intro/location,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_012,OPERATIONAL,2026-02-01 10:00,
 CFG_WEB_005,주요사업 (메인),,WEB_PAGE,L1_PAGE,1,,/business,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_013,OPERATIONAL,2026-02-01 10:00,
 CFG_WEB_006,주요사업 > AI바우처지원,,WEB_PAGE,L2_PAGE,2,CFG_WEB_005,/business/voucher,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_013,OPERATIONAL,2026-02-01 10:00,
-CFG_WEB_007,주요사업 > AI바우처지원 > 사업공고,,WEB_PAGE,L3_PAGE,3,CFG_WEB_006,/business/voucher/notice,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_013,OPERATIONAL,2026-02-01 10:00,CHG_20260512_003
-CFG_WEB_008,주요사업 > AI바우처지원 > 접수시스템,,WEB_PAGE,L3_PAGE,3,CFG_WEB_006,/business/voucher/apply,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_014,OPERATIONAL,2026-02-01 10:00,CHG_20260512_003
+CFG_WEB_007,주요사업 > AI바우처지원 > 사업공고,,WEB_PAGE,L3_PAGE,3,CFG_WEB_006,/business/voucher/notice,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_013,OPERATIONAL,2026-02-01 10:00,
+CFG_WEB_008,주요사업 > AI바우처지원 > 접수시스템,,WEB_PAGE,L3_PAGE,3,CFG_WEB_006,/business/voucher/apply,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_014,OPERATIONAL,2026-02-01 10:00,
 CFG_WEB_010,주요사업 > AI인재양성 > 교육일정,,WEB_PAGE,L3_PAGE,3,CFG_WEB_009,/business/edu/schedule,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_015,OPERATIONAL,2026-02-01 10:00,
 CFG_WEB_009,주요사업 > AI인재양성,,WEB_PAGE,L2_PAGE,2,CFG_WEB_005,/business/edu,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_015,OPERATIONAL,2026-02-01 10:00,
 CFG_WEB_011,주요사업 > AI인재양성 > 온라인신청,,WEB_PAGE,L3_PAGE,3,CFG_WEB_009,/business/edu/regist,,전자정부프레임워크 v4.1,,AI융합사업팀,USR_016,OPERATIONAL,2026-02-01 10:00,
@@ -304,7 +304,7 @@ CFG_WEB_012,알림마당 (메인),,WEB_PAGE,L1_PAGE,1,,/notice,,전자정부프�
 CFG_WEB_015,알림마당 > 공지사항 > 입찰공고,,WEB_PAGE,L3_PAGE,3,CFG_WEB_013,/notice/general/bid,,전자정부프레임워크 v4.1,,경영지원팀,USR_022,OPERATIONAL,2026-02-01 10:00,
 CFG_WEB_017,알림마당 > 보도자료 > 상세조회,,WEB_PAGE,L3_PAGE,3,CFG_WEB_016,/notice/press/detail,,전자정부프레임워크 v4.1,,경영지원팀,USR_023,OPERATIONAL,2026-02-01 10:00,
 CFG_WEB_016,알림마당 > 보도자료,,WEB_PAGE,L2_PAGE,2,CFG_WEB_012,/notice/press,,전자정부프레임워크 v4.1,,경영지원팀,USR_023,OPERATIONAL,2026-02-01 10:00,
-CFG_WEB_018,알림마당 > 보도자료 > 등록폼,,WEB_PAGE,L3_PAGE,3,CFG_WEB_016,/notice/press/write,,전자정부프레임워크 v4.1,,경영지원팀,USR_023,OPERATIONAL,2026-02-01 10:00,CHG_20260601_005
+CFG_WEB_018,알림마당 > 보도자료 > 등록폼,,WEB_PAGE,L3_PAGE,3,CFG_WEB_016,/notice/press/write,,전자정부프레임워크 v4.1,,경영지원팀,USR_023,OPERATIONAL,2026-02-01 10:00,
 CFG_WEB_019,ITSM 통합관리대시보드 (메인),,WEB_PAGE,L1_PAGE,1,,5_ITSM관리/index.html,,Static HTML/CSS/JS,,정보화기획팀,USR_001,OPERATIONAL,2026-07-11 12:00,CHG_20260711_014
 CFG_WEB_020,ITSM 통합관리대시보드 > 변경관리,,WEB_PAGE,L2_PAGE,2,CFG_WEB_019,5_ITSM관리/변경관리.html,,Static HTML/CSS/JS,,정보화기획팀,USR_001,OPERATIONAL,2026-07-11 12:00,CHG_20260711_014
 CFG_WEB_021,ITSM 통합관리대시보드 > 장애관리,,WEB_PAGE,L2_PAGE,2,CFG_WEB_019,5_ITSM관리/장애관리.html,,Static HTML/CSS/JS,,정보화기획팀,USR_001,OPERATIONAL,2026-07-11 12:00,CHG_20260711_014
