@@ -486,10 +486,9 @@ footer a:hover {
 .building-stage {
   height: 460px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-end;
   padding-bottom: 70px;
-  padding-left: 40px;
   perspective: 1300px;
   overflow-x: auto;
 }
