@@ -62,7 +62,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 24px;
+  padding: 8px 24px;
   background: var(--surface-1);
   border-bottom: 1px solid var(--border);
 }
@@ -82,7 +82,7 @@ body {
 }
 
 .navbar .brand-mark {
-  height: 28px;
+  height: 48px;
   width: auto;
   display: block;
 }
