@@ -41,3 +41,4 @@
 |---|---|---|
 | 2026-07-11 | (당시 명칭)모니터링및이벤트관리로 EVENT 테이블 필드 정의 신설. CI·장애와는 N:1 관계라 중간 테이블 없이 FK로 직접 연결 | Claude |
 | 2026-07-11 | RAW/erd-참고용.png(통합 ITSM 13단계 운영 흐름도)의 13개 항목에 맞춰 명칭을 "이벤트관리"로 정리하고 폴더 번호를 12로 이동. OPS→EVT 흐름을 반영해 `SOURCE_OPS_ID` FK 컬럼 추가 | Claude |
+| 2026-07-12 | Streamlit `pages/12_이벤트관리.py`를 읽기 전용 조회에서 실제 등록/조회 CRUD 화면으로 교체 — 상태 선택 → 조회, 이벤트 등록(폼, CI_ID·SOURCE_OPS_ID·ESCALATED_INCIDENT_ID FK selectbox 포함)/삭제. `CHG_20260712_004`로 변경 이력 등록 | Claude |

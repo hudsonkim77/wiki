@@ -1,4 +1,4 @@
-from datetime import datetime
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -9,51 +9,24 @@ WIKI_ROOT = ROOT.parent
 CHANGE_CSV = WIKI_ROOT / "1_변경관리" / "CHANGE.csv"
 INCIDENT_CSV = WIKI_ROOT / "2_장애관리" / "INCIDENT.csv"
 
+sys.path.insert(0, str(ROOT))
+from column_labels import ko_labels  # noqa: E402
+from crud_helpers import fk_options, load_df, next_id, save_df  # noqa: E402
+
 STATUS_OPTIONS = ["등록", "검토중", "승인", "적용완료", "보류", "롤백"]
 TYPE_OPTIONS = ["표준", "긴급", "비상"]
 IMPACT_OPTIONS = ["낮음", "중간", "높음"]
 
-COLUMN_LABELS_KO = {
-    "CHG_TICKET_ID": "변경 티켓 ID",
-    "CHG_TITLE": "변경 제목",
-    "CHG_TYPE": "변경 유형",
-    "CHG_STATUS": "변경 상태",
-    "IMPACT_LEVEL": "영향도",
-    "APPLIED_DT": "적용 일시",
-    "TRIGGERED_BY_INCIDENT_ID": "촉발 장애 ID",
-}
+LIST_COLUMNS = ["CHG_TICKET_ID", "CHG_TITLE", "CHG_TYPE", "CHG_STATUS", "IMPACT_LEVEL", "APPLIED_DT", "TRIGGERED_BY_INCIDENT_ID"]
 
 st.logo(str(ROOT / "assets" / "logo-full-flat.png"), icon_image=str(ROOT / "assets" / "logo-mark-flat.png"))
 st.image(str(ROOT / "assets" / "logo-nav-flat.png"), width=420)
 
 st.title("변경관리")
 
-
-def load_change():
-    return pd.read_csv(CHANGE_CSV, dtype=str, keep_default_na=False)
-
-
-def save_change(df):
-    df.to_csv(CHANGE_CSV, index=False)
-
-
-def load_incident_ids():
-    if not INCIDENT_CSV.exists():
-        return []
-    inc_df = pd.read_csv(INCIDENT_CSV, dtype=str, keep_default_na=False)
-    return inc_df["INCIDENT_ID"].tolist()
-
-
-def next_chg_id(df):
-    today = datetime.now().strftime("%Y%m%d")
-    existing = df["CHG_TICKET_ID"].str.extract(rf"^CHG_{today}_(\d+)$")[0].dropna().astype(int)
-    n = (existing.max() + 1) if len(existing) else 1
-    return f"CHG_{today}_{n:03d}"
-
-
 st.subheader("변경요청 등록/조회")
 
-change_df = load_change()
+change_df = load_df(CHANGE_CSV)
 status_values = change_df["CHG_STATUS"].replace("", "미정")
 status_options = ["전체"] + sorted(status_values.unique().tolist())
 selected_status = st.selectbox("상태 선택", options=status_options)
@@ -61,7 +34,7 @@ selected_status = st.selectbox("상태 선택", options=status_options)
 filtered = change_df if selected_status == "전체" else change_df[status_values == selected_status]
 st.caption(f"{selected_status} — {len(filtered)}건")
 st.dataframe(
-    filtered[list(COLUMN_LABELS_KO.keys())].rename(columns=COLUMN_LABELS_KO),
+    filtered[LIST_COLUMNS].rename(columns=ko_labels(LIST_COLUMNS)),
     width="stretch",
     hide_index=True,
 )
@@ -83,16 +56,18 @@ with col_add:
                 applied_dt = st.text_input("APPLIED_DT (YYYY-MM-DD)")
                 rollback_yn = st.selectbox("ROLLBACK_YN", ["N", "Y"])
                 related_desc = st.text_area("RELATED_DESC")
-                incident_options = ["(없음)"] + load_incident_ids()
-                triggered_by = st.selectbox("TRIGGERED_BY_INCIDENT_ID (이 변경을 촉발한 장애)", incident_options)
+                triggered_by = st.selectbox(
+                    "TRIGGERED_BY_INCIDENT_ID (이 변경을 촉발한 장애)",
+                    fk_options(INCIDENT_CSV, "INCIDENT_ID"),
+                )
             submitted = st.form_submit_button("등록")
             if submitted:
                 if not chg_title.strip():
                     st.error("CHG_TITLE은 필수입니다.")
                 else:
-                    new_id = next_chg_id(change_df)
+                    new_ticket_id = next_id(change_df, "CHG_TICKET_ID", "CHG")
                     new_row = {
-                        "CHG_TICKET_ID": new_id, "CHG_TITLE": chg_title, "CHG_TYPE": chg_type,
+                        "CHG_TICKET_ID": new_ticket_id, "CHG_TITLE": chg_title, "CHG_TYPE": chg_type,
                         "REQUEST_TEAM": request_team, "REQUESTER_ID": requester_id,
                         "APPROVER_ID": approver_id, "CHG_STATUS": chg_status,
                         "PLANNED_DT": planned_dt, "APPLIED_DT": applied_dt,
@@ -101,8 +76,8 @@ with col_add:
                         "TRIGGERED_BY_INCIDENT_ID": "" if triggered_by == "(없음)" else triggered_by,
                     }
                     updated = pd.concat([change_df, pd.DataFrame([new_row])], ignore_index=True)
-                    save_change(updated)
-                    st.success(f"{new_id} 등록 완료")
+                    save_df(updated, CHANGE_CSV)
+                    st.success(f"{new_ticket_id} 등록 완료")
                     st.rerun()
 
 with col_del:
@@ -116,7 +91,7 @@ with col_del:
             confirm = st.checkbox("정말 삭제하시겠습니까? (되돌릴 수 없습니다)", key="del_confirm")
             if st.button("삭제 실행", disabled=not confirm):
                 updated = change_df[change_df["CHG_TICKET_ID"] != selected_del_id]
-                save_change(updated)
+                save_df(updated, CHANGE_CSV)
                 st.success(f"{selected_del_id} 삭제 완료")
                 st.rerun()
 

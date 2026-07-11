@@ -48,3 +48,4 @@
 |---|---|---|
 | 2026-07-11 | ITIL v4 WBS 13개 실무 항목 중 미착수 항목에 대한 도메인 스캐폴딩 작업으로 PROBLEM 테이블 필드 정의 및 장애관리와의 N:M 관계(PROBLEM_INCIDENT_MAP) 신설. 실제 문제 데이터가 없어 스키마(헤더)만 우선 반영 | Claude |
 | 2026-07-11 | 첫 실데이터로 `PRB_20260711_001`(정적 HTML/Streamlit 배포판 UI 반영 미동기화가 세션 내 3회 반복된 문제) 등록. `INC_20260711_002`(세 번째 반복 사례)를 `PROBLEM_INCIDENT_MAP`으로 연결. STATUS는 근본조치가 부분적으로만 진행돼(신규 도메인은 Streamlit 전용으로 통일) 아직 "조사중" | Claude |
+| 2026-07-12 | Streamlit `pages/6_문제관리.py`를 읽기 전용 조회에서 실제 등록/조회 CRUD 화면으로 교체 — 상태 선택 → 조회, 문제 등록(폼, PROBLEM_TYPE·STATUS selectbox)/삭제. `CHG_20260712_004`로 변경 이력 등록 | Claude |

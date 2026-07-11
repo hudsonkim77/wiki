@@ -52,3 +52,4 @@
 |---|---|---|
 | 2026-07-11 | 형상관리(소프트웨어 형상관리) 폴더 신설. BASELINE 테이블 필드 정의 및 구성관리와의 N:M 관계(BASELINE_CI_MAP) 반영 | Claude |
 | 2026-07-11 | RAW/erd-참고용.png 검토 후 PRB→SCM 흐름 반영, `RESOLVED_PROBLEM_ID` FK 컬럼 추가. 연계관리(INT)와의 관계 명시 | Claude |
+| 2026-07-12 | Streamlit `pages/10_형상관리.py`를 읽기 전용 조회에서 실제 등록/조회 CRUD 화면으로 교체 — 상태 선택 → 조회, 베이스라인 등록(폼, RESOLVED_PROBLEM_ID FK selectbox 포함)/삭제. `CHG_20260712_004`로 변경 이력 등록 | Claude |

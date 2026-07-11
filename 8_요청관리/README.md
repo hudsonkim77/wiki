@@ -48,3 +48,4 @@
 |---|---|---|
 | 2026-07-11 | (당시 명칭)서비스요청관리로 SERVICE_REQUEST 테이블 필드 정의 및 구성관리와의 N:M 관계(REQUEST_CI_MAP) 신설 | Claude |
 | 2026-07-11 | RAW/erd-참고용.png(통합 ITSM 13단계 운영 흐름도)의 13개 항목에 맞춰 명칭을 "요청관리"로 정리(폴더 8_요청관리, 파일 REQUEST.csv). 장애관리와의 N:M 관계(REQUEST_INCIDENT_MAP) 신규 반영 | Claude |
+| 2026-07-12 | Streamlit `pages/8_요청관리.py`를 읽기 전용 조회에서 실제 등록/조회 CRUD 화면으로 교체 — 상태 선택 → 조회, 요청 등록(폼)/삭제. `CHG_20260712_004`로 변경 이력 등록 | Claude |

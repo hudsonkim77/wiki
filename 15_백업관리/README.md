@@ -41,3 +41,4 @@
 | 날짜 | 내용 | 작성자 |
 |---|---|---|
 | 2026-07-11 | RAW/erd-참고용.png(통합 ITSM 13단계 운영 흐름도) 반영 스캐폴딩 작업으로 BACKUP 테이블 필드 정의(백업/복구 양방향 ACTION_TYPE 구분) 및 구성관리와의 N:M 관계(BACKUP_CI_MAP) 신설. 실제 백업 데이터가 없어 스키마(헤더)만 우선 반영 | Claude |
+| 2026-07-12 | Streamlit `pages/15_백업관리.py`를 읽기 전용 조회에서 실제 등록/조회 CRUD 화면으로 교체 — 상태 선택 → 조회, 백업 등록(폼, RESTORED_FROM_BACKUP_ID 자기참조 FK selectbox 포함)/삭제. `CHG_20260712_004`로 변경 이력 등록 | Claude |

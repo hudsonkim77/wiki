@@ -64,3 +64,4 @@
 | 2026-07-11 | 개념 설계한 INCIDENT 테이블을 이 폴더에 `INCIDENT.csv`(헤더만)로 생성. 중간테이블은 `장애이력/` 폴더를 신설하여 `INCIDENT_CI_MAP.csv`(헤더만)로 생성. 실제 장애 데이터가 없어 두 파일 모두 스키마만 우선 반영 | Claude |
 | 2026-07-11 | 첫 실제 장애 `INC_20260711_001`(Streamlit `홈.py` CHANGE.csv 파싱 에러) 등록. `CAUSED_BY_CHG_TICKET_ID`로 `CHG_20260711_003`과 연결하고, `장애이력/INCIDENT_CI_MAP.csv`에 `MAP_0001`로 `CFG_WEB_019`와의 영향 관계 추가 | Claude |
 | 2026-07-11 | `INC_20260711_002`(Streamlit 배포판 상단 로고 크기 미반영 반복, 사용자 요청 3회 미해결) 등록. `CAUSED_BY_CHG_TICKET_ID`로 `CHG_20260711_007`과 연결하고, `장애이력/INCIDENT_CI_MAP.csv`에 `MAP_0002`로 `CFG_WEB_019`와의 영향 관계 추가 | Claude |
+| 2026-07-12 | Streamlit `pages/2_장애관리.py`를 placeholder에서 실제 등록/조회 CRUD 화면으로 교체 — 상태 선택 → 조회, 장애 등록(폼)/삭제. `CAUSED_BY_CHG_TICKET_ID`는 `CHANGE.csv`의 실제 변경 티켓을 selectbox로 선택해 연결. `CHG_20260712_004`로 변경 이력 등록 | Claude |

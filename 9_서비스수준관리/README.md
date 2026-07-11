@@ -51,3 +51,4 @@
 |---|---|---|
 | 2026-07-11 | ITIL v4 WBS 13개 실무 항목 중 미착수 항목에 대한 도메인 스캐폴딩 작업으로 SLA 테이블 필드 정의 및 장애관리와의 N:M 관계(SLA_INCIDENT_MAP) 신설 | Claude |
 | 2026-07-11 | RAW/erd-참고용.png(통합 ITSM 13단계 운영 흐름도) 반영 — 가용성관리(#10, 그림에 없어 삭제됨) 참조를 정리하고, 운영상태관리와의 N:M 관계(SLA_OPS_MAP), 배포관리와의 N:1 관계(DEPLOY_ID) 신규 반영 | Claude |
+| 2026-07-12 | Streamlit `pages/9_서비스수준관리.py`를 읽기 전용 조회에서 실제 등록/조회 CRUD 화면으로 교체 — 상태 선택 → 조회, SLA 등록(폼, DEPLOY_ID FK selectbox 포함)/삭제. `CHG_20260712_004`로 변경 이력 등록 | Claude |

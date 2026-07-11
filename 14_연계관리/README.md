@@ -44,3 +44,4 @@
 | 날짜 | 내용 | 작성자 |
 |---|---|---|
 | 2026-07-11 | RAW/erd-참고용.png(통합 ITSM 13단계 운영 흐름도) 반영 스캐폴딩 작업으로 INTERFACE 테이블 필드 정의 및 구성관리와의 N:M 관계(INTERFACE_CI_MAP), 테스트관리·형상관리와의 N:1 관계(직접 FK) 신설. 실제 연계 데이터가 없어 스키마(헤더)만 우선 반영 | Claude |
+| 2026-07-12 | Streamlit `pages/14_연계관리.py`를 읽기 전용 조회에서 실제 등록/조회 CRUD 화면으로 교체 — 상태 선택 → 조회, 연계 등록(폼, VALIDATED_BY_TEST_ID·BASELINE_ID FK selectbox 포함)/삭제. `CHG_20260712_004`로 변경 이력 등록 | Claude |
