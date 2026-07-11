@@ -13,14 +13,66 @@
 ## 데이터 목록
 | 파일명 | 설명 | 출처 | 최종 수정일 | 비고 |
 |---|---|---|---|---|
-| | | | | |
+| CFG.csv | CI(자산) 마스터 원본. 서버/네트워크장비/PC/스토리지/웹페이지/인력(HUMAN) 등 구성항목과 계층(부모-자식), 담당자, 최근 변경티켓 정보를 포함 | 자산 실사/CMDB 추출 | 2026-07-11 | 중복 행·중복 헤더 포함 (아래 참고 및 관리 방법 참조) |
+
+## CI(자산) 마스터 필드 정의
+`CFG.csv`의 컬럼을 분석하여 정리한 필드 정의입니다. 이 테이블이 변경관리·장애관리와 연결되는 **중심(허브) 테이블**입니다.
+
+| 필드명 | 설명 | 비고 |
+|---|---|---|
+| CI_ID | 구성항목 고유 ID | **PK**. 예: `CFG_SRV_001`, `AST-SEC-007` |
+| CI_NAME | 구성항목 명칭 | |
+| HOST_NAME | 호스트명 | HUMAN/WEB_PAGE 등 일부 유형은 공란 |
+| CI_TYPE | 구성항목 유형 | 예: HARDWARE, NETWORK, WEB_PAGE, HUMAN, Server, Firewall 등 |
+| CI_CATEGORY | 구성항목 분류(하위 카테고리) | 예: Storage, VM, Staff, PC, Switch, L1~L3_PAGE 등 |
+| DEPTH_LEVEL | 계층 깊이 | 0=최상위, PARENT_CI_ID와 함께 트리 구조 표현 |
+| PARENT_CI_ID | 상위 구성항목 ID | **FK → CI.CI_ID (자기참조)** |
+| LOCATION_OR_URL | 위치 또는 URL | 물리 장비는 위치, 웹페이지는 경로 |
+| IP_ADDRESS | IP 주소 | 해당 없는 유형(PC, 웹페이지, 인력 등)은 공란 |
+| OS_VERSION | OS/플랫폼 버전 | |
+| SERIAL_NUM | 일련번호 | |
+| OWNER_TEAM | 소유/관리 부서 | |
+| ADMIN_USER_ID | 담당자 ID | **FK(느슨한 참조) → CI.CI_ID(HUMAN 유형)**. 원본에 `USR_006` vs `CFG_USR_006`처럼 표기 불일치가 있어 정합화 필요 |
+| STATUS | 상태 | 예: OPERATIONAL, Active, STANDBY |
+| INST_DT | 등록/설치일시 | |
+| CHG_TICKET_ID | 최근 관련 변경 티켓 ID | **FK → CHANGE.CHG_TICKET_ID**. 1개 컬럼으로는 CI 1건에 변경 이력 1건만 표현 가능 → 다건 이력은 아래 `CHANGE_CI_MAP` 중간 테이블로 관리 |
+
+## 데이터 모델 및 연관관계 (ERD 요약)
+구성관리(CI)를 허브로, 변경관리·장애관리가 N:M으로 연결되는 구조입니다.
+
+```
+CI (구성관리) 1 ──< CHANGE_CI_MAP >── N CHANGE (변경관리)
+CI (구성관리) 1 ──< INCIDENT_CI_MAP >── N INCIDENT (장애관리)
+CHANGE (변경관리) 1 ──< INCIDENT (장애관리)   * 변경이 유발한 장애인 경우 (선택적 FK)
+```
+
+- CI 1건은 여러 번의 변경/여러 건의 장애와 연관될 수 있고, 변경/장애 1건도 여러 CI에 영향을 줄 수 있어 **N:M** 관계입니다. 따라서 직접 FK 대신 중간(연결) 테이블을 둡니다.
+- 각 도메인의 상세 필드는 [1_변경관리](../1_변경관리/README.md), [2_장애관리](../2_장애관리/README.md) 문서를 참고하세요.
+
+### CHANGE_CI_MAP (변경-구성 연결 테이블)
+| 필드명 | 설명 | 비고 |
+|---|---|---|
+| MAP_ID | 매핑 고유 ID | **PK** (또는 `CHG_TICKET_ID`+`CI_ID` 복합키로 대체 가능) |
+| CHG_TICKET_ID | 변경 티켓 ID | **FK → CHANGE.CHG_TICKET_ID** |
+| CI_ID | 영향받은 구성항목 ID | **FK → CI.CI_ID** |
+| APPLIED_DT | 해당 CI에 변경이 적용된 일시 | |
+| WORK_NOTE | 해당 CI 기준 작업 메모 | |
+
+### INCIDENT_CI_MAP (장애-구성 연결 테이블)
+| 필드명 | 설명 | 비고 |
+|---|---|---|
+| MAP_ID | 매핑 고유 ID | **PK** (또는 `INCIDENT_ID`+`CI_ID` 복합키로 대체 가능) |
+| INCIDENT_ID | 장애 ID | **FK → INCIDENT.INCIDENT_ID** |
+| CI_ID | 영향받은 구성항목 ID | **FK → CI.CI_ID** |
+| IMPACT_DESC | 해당 CI 기준 영향 내용 | |
 
 ## 참고 및 관리 방법
 - 원본 데이터는 직접 수정하지 않고, 가공이 필요한 경우 별도 사본을 만들어 작업합니다.
 - 데이터 추가/변경 시 위 목록 표를 함께 갱신합니다.
+- **[데이터 품질 이슈]** `CFG.csv`에 헤더 행이 2회 포함(52번째 줄 재등장)되어 있고, 완전 중복 행 및 중복 `CI_ID`가 다수 발견되었습니다(예: `CFG_DEV_001` 등). `CI_ID`를 PK로 사용하려면 중복 제거 작업이 선행되어야 하며, 원본 보존 원칙에 따라 정제본은 별도 사본으로 생성할 예정입니다.
 - (작성 예정) 버전 관리, 백업 주기, 접근 권한 등
 
 ## 변경 이력
 | 날짜 | 내용 | 작성자 |
 |---|---|---|
-| | | |
+| 2026-07-11 | CFG.csv 필드 분석 → CI 마스터 필드 정의, 변경관리/장애관리 연결을 위한 CHANGE_CI_MAP·INCIDENT_CI_MAP 중간 테이블 설계 추가 | Claude |
