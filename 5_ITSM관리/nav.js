@@ -9,7 +9,7 @@
     { key: 'ci', label: '구성관리', href: '구성관리.html' }
   ];
 
-  const LOGO_MARK_SRC = 'assets/logo-mark.png';
+  const LOGO_NAV_SRC = 'assets/logo-nav.png';
   const LOGO_FULL_SRC = 'assets/logo-full.png';
 
   window.renderNav = function (activeKey) {
@@ -24,7 +24,7 @@
 
       const mark = document.createElement('img');
       mark.className = 'brand-mark';
-      mark.src = LOGO_MARK_SRC;
+      mark.src = LOGO_NAV_SRC;
       mark.alt = 'AI활성화진흥공단';
 
       const brandText = document.createElement('span');

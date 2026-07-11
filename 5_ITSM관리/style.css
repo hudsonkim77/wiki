@@ -82,9 +82,13 @@ body {
 }
 
 .navbar .brand-mark {
-  height: 48px;
-  width: auto;
+  width: 420px;
+  max-width: 46vw;
+  height: auto;
   display: block;
+  background: #e2dcd0;
+  padding: 6px 12px;
+  border-radius: 8px;
 }
 
 .nav-buttons {
