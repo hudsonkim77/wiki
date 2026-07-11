@@ -5,53 +5,39 @@
   document.getElementById('total-assets').textContent = data.totalAssets.toLocaleString();
   document.getElementById('snapshot-date').textContent = data.snapshotDate;
 
-  // ---- 카테고리별 막대바 (Chart.js, 관제형 단일 앰버 그라데이션) ----
+  // ---- 카테고리별 막대바 (ApexCharts, 관제형 단일 앰버 그라데이션) ----
   const rootStyle = getComputedStyle(document.documentElement);
   const accentColor = rootStyle.getPropertyValue('--accent').trim();
   const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim();
 
-  const sortedCategories = [...data.assetsByCategory].sort((a, b) => b.count - a.count);
-  const canvas = document.getElementById('category-bar-chart');
-  canvas.parentElement.style.height = `${28 * sortedCategories.length + 16}px`;
+  const sortedCategories = [...data.assetsByCategory].sort((a, b) => a.count - b.count);
+  const chartBox = document.getElementById('category-bar-chart');
+  chartBox.style.height = `${28 * sortedCategories.length + 16}px`;
 
-  const ctx = canvas.getContext('2d');
-  const barGradient = ctx.createLinearGradient(0, 0, canvas.parentElement.clientWidth || 600, 0);
-  barGradient.addColorStop(0, accentColor);
-  barGradient.addColorStop(1, '#ffc27a');
-
-  new Chart(canvas, {
-    type: 'bar',
-    data: {
-      labels: sortedCategories.map((d) => d.label || d.category),
-      datasets: [{
-        data: sortedCategories.map((d) => d.count),
-        backgroundColor: barGradient,
-        borderRadius: 6,
-        barPercentage: 0.7,
-      }],
+  new ApexCharts(chartBox, {
+    chart: {
+      type: 'bar', height: '100%', background: 'transparent', toolbar: { show: false },
+      animations: { speed: 600, easing: 'easeout' },
     },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 700, easing: 'easeOutQuart' },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => `자산수: ${ctx.formattedValue}건`,
-          },
-        },
-      },
-      scales: {
-        x: { display: false },
-        y: {
-          ticks: { color: textSecondary, font: { size: 12 } },
-          grid: { display: false },
-        },
-      },
+    series: [{ name: '자산수', data: sortedCategories.map((d) => d.count) }],
+    xaxis: {
+      categories: sortedCategories.map((d) => d.label || d.category),
+      labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false },
     },
-  });
+    yaxis: { labels: { style: { colors: textSecondary, fontSize: '11.5px' } } },
+    plotOptions: { bar: { horizontal: true, borderRadius: 6, barHeight: '65%' } },
+    dataLabels: { enabled: true, style: { colors: [textSecondary] }, offsetX: 20 },
+    grid: { show: false },
+    fill: {
+      type: 'gradient',
+      gradient: { shade: 'dark', type: 'horizontal', colorStops: [
+        { offset: 0, color: accentColor, opacity: 1 },
+        { offset: 100, color: '#ffc27a', opacity: 1 },
+      ] },
+    },
+    tooltip: { theme: 'dark', y: { formatter: (v) => `${v}건` } },
+    legend: { show: false },
+  }).render();
 
   // ---- 하단 현황 스코어보드 ----
   const tiles = [

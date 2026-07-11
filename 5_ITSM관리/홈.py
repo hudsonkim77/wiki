@@ -1,9 +1,10 @@
+import json
 import sys
 from pathlib import Path
 
 import pandas as pd
-import plotly.graph_objects as go
 import streamlit as st
+import streamlit.components.v1 as components
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "5_ITSM관리"))
@@ -63,41 +64,34 @@ def render_home():
             )
             cat_counts["category_ko"] = cat_counts["category"].map(CATEGORY_LABELS_KO).fillna(cat_counts["category"])
             categories_ko = cat_counts["category_ko"].tolist()
-            n = max(len(categories_ko) - 1, 1)
-            start_rgb = tuple(int(ACCENT_START[i : i + 2], 16) for i in (1, 3, 5))
-            end_rgb = tuple(int(ACCENT_END[i : i + 2], 16) for i in (1, 3, 5))
-            colors = [
-                "#{:02x}{:02x}{:02x}".format(
-                    *(int(s + (e - s) * i / n) for s, e in zip(start_rgb, end_rgb))
-                )
-                for i in range(len(categories_ko))
-            ]
-
-            fig = go.Figure(
-                go.Bar(
-                    y=categories_ko,
-                    x=cat_counts["count"],
-                    orientation="h",
-                    marker=dict(color=colors, line=dict(width=0)),
-                    text=cat_counts["count"],
-                    textposition="outside",
-                    hovertemplate="<b>%{y}</b><br>자산수: %{x}건<extra></extra>",
-                )
+            counts = cat_counts["count"].tolist()
+            chart_height = 28 * len(categories_ko) + 40
+            components.html(
+                f"""
+                <div id="cat-bar" style="height:{chart_height}px"></div>
+                <script src="https://cdn.jsdelivr.net/npm/apexcharts/dist/apexcharts.min.js"></script>
+                <script>
+                  new ApexCharts(document.getElementById('cat-bar'), {{
+                    chart: {{ type: 'bar', height: '100%', background: 'transparent', toolbar: {{ show: false }},
+                              animations: {{ speed: 600, easing: 'easeout' }} }},
+                    series: [{{ name: '자산수', data: {json.dumps(counts)} }}],
+                    xaxis: {{ categories: {json.dumps(categories_ko)}, labels: {{ show: false }},
+                              axisBorder: {{ show: false }}, axisTicks: {{ show: false }} }},
+                    yaxis: {{ labels: {{ style: {{ colors: '#a7acb3', fontSize: '11.5px' }} }} }},
+                    plotOptions: {{ bar: {{ horizontal: true, borderRadius: 6, barHeight: '65%' }} }},
+                    dataLabels: {{ enabled: true, style: {{ colors: ['#a7acb3'] }}, offsetX: 20 }},
+                    grid: {{ show: false }},
+                    fill: {{ type: 'gradient', gradient: {{ shade: 'dark', type: 'horizontal', colorStops: [
+                      {{ offset: 0, color: '{ACCENT_START}', opacity: 1 }},
+                      {{ offset: 100, color: '{ACCENT_END}', opacity: 1 }},
+                    ] }} }},
+                    tooltip: {{ theme: 'dark', y: {{ formatter: (v) => `${{v}}건` }} }},
+                    legend: {{ show: false }},
+                  }}).render();
+                </script>
+                """,
+                height=chart_height + 10,
             )
-            fig.update_traces(marker_cornerradius=6)
-            fig.update_layout(
-                height=28 * len(categories_ko) + 40,
-                margin=dict(l=0, r=24, t=8, b=0),
-                xaxis=dict(visible=False),
-                yaxis=dict(title=None, color="#a7acb3"),
-                plot_bgcolor="rgba(0,0,0,0)",
-                paper_bgcolor="rgba(0,0,0,0)",
-                font=dict(size=12, color="#a7acb3"),
-                showlegend=False,
-                bargap=0.35,
-                transition=dict(duration=400, easing="cubic-in-out"),
-            )
-            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
     st.subheader("현황")
     history_df = pd.read_csv(CI_HISTORY_CSV) if CI_HISTORY_CSV.exists() else pd.DataFrame(columns=["ACTION"])
