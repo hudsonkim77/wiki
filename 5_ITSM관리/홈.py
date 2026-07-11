@@ -44,7 +44,7 @@ with col_chart:
         alt.Chart(cat_counts)
         .mark_bar(cornerRadiusTopRight=4, cornerRadiusBottomRight=4, size=16)
         .encode(
-            y=alt.Y("category:N", sort="-x", title=None),
+            y=alt.Y("category:N", sort=categories, title=None),
             x=alt.X("count:Q", title=None),
             color=alt.Color(
                 "category:N",
