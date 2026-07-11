@@ -714,12 +714,81 @@ footer a:hover {
   border-color: var(--accent);
 }
 
+/* ERD 페이지는 26개 테이블을 다뤄야 해서 본문 폭 제한(1120px)을 풀고 화면 끝까지 쓴다.
+   다른 페이지의 main{max-width:1120px}에는 영향 없도록 이 클래스가 붙은 페이지에서만 적용. */
+main.erd-wide-main {
+  max-width: 100% !important;
+}
+
+.erd-zoom-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.erd-zoom-toolbar button {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.erd-zoom-toolbar button:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.erd-zoom-toolbar .erd-zoom-reset {
+  width: auto;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.erd-zoom-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 42px;
+}
+
+.erd-zoom-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+/* 마우스 휠 확대/축소 + 드래그 이동이 가능한 뷰포트. overflow:hidden으로 잘라내고
+   내부 .erd-zoom-content에 CSS transform(scale+translate)을 걸어 확대/이동을 구현한다
+   (가로 스크롤 방식은 26개 테이블 물리 모델 전체를 한눈에 보기 어려워 확대/축소로 대체). */
 .erd-mermaid-scroll {
   position: relative;
-  overflow-x: auto;
+  overflow: hidden;
+  height: 70vh;
+  min-height: 420px;
   background: var(--page-plane);
   border-radius: 8px;
-  padding: 12px;
+  padding: 0;
+  cursor: grab;
+}
+
+.erd-mermaid-scroll.erd-dragging {
+  cursor: grabbing;
+}
+
+.erd-zoom-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  padding: 16px;
 }
 
 /* display:none 대신 visibility:hidden을 쓰는 이유 — Mermaid는 렌더링 시점에 컨테이너의
@@ -734,7 +803,7 @@ footer a:hover {
 
 /* Mermaid는 svg에 기본으로 max-width:100%를 넣어 컨테이너에 맞춰 축소시키는데,
    테이블이 26개인 물리 모델은 그렇게 하면 글자를 읽을 수 없을 만큼 작아진다.
-   원본 크기 그대로 두고 .erd-mermaid-scroll의 overflow-x로 가로 스크롤하게 한다. */
+   원본 크기 그대로 두고 .erd-zoom-content의 transform(scale)으로 확대/축소한다. */
 .erd-mermaid-scroll svg {
   max-width: none !important;
   width: auto !important;
