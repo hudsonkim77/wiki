@@ -8,6 +8,14 @@ ROOT = Path(__file__).resolve().parent.parent
 CI_CSV = ROOT / "3_구성관리" / "CI.csv"
 CHANGE_CSV = ROOT / "1_변경관리" / "CHANGE.csv"
 INCIDENT_CSV = ROOT / "2_장애관리" / "INCIDENT.csv"
+PRIVACY_POLICY_MD = ROOT / "5_ITSM관리" / "개인정보처리방침.md"
+
+
+# 정적 HTML 버전의 policy-modal.js와 동일한 역할. 원문(개인정보처리방침.md)을 그대로
+# st.markdown으로 렌더링하므로 본문 수정 시 이 코드는 그대로 두고 .md 파일만 고치면 됨.
+@st.dialog("개인정보 처리방침")
+def show_privacy_policy():
+    st.markdown(PRIVACY_POLICY_MD.read_text(encoding="utf-8"))
 
 CAT_COLORS = [
     "#2a78d6", "#1baf7a", "#eda100", "#008300",
@@ -116,4 +124,9 @@ else:
     st.caption("🔴 장애 · 이력 없음")
 
 st.divider()
-st.caption("개인정보처리방침 · 이용약관 (원고 준비 후 연결 예정)")
+footer_col1, footer_col2 = st.columns([1, 1])
+with footer_col1:
+    if st.button("개인정보처리방침"):
+        show_privacy_policy()
+with footer_col2:
+    st.caption("이용약관 (원고 준비 후 연결 예정)")
