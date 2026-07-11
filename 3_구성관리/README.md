@@ -68,6 +68,20 @@ CHANGE (변경관리) 1 ──< INCIDENT (장애관리)   * 변경이 유발한 
 | CI_ID | 영향받은 구성항목 ID | **FK → CI.CI_ID** |
 | IMPACT_DESC | 해당 CI 기준 영향 내용 | |
 
+## CI 허브에 연결되는 전체 도메인 (2026-07-11 확장)
+`RAW/erd-참고용.png`(통합 ITSM 13단계 운영 흐름도)에 맞춰 위키 전체를 13개 도메인으로 재정렬하면서, CI를 허브로 아래 도메인들이 추가로 연결되었습니다. 상세 필드는 각 도메인 문서를 참고하세요.
+
+| 연결 도메인 | 중간테이블/FK | 관계 |
+|---|---|---|
+| [8_요청관리](../8_요청관리/README.md) REQUEST | REQUEST_CI_MAP | N:M |
+| [11_운영상태관리](../11_운영상태관리/README.md) OPS_STATUS | OPS_CI_MAP | N:M |
+| [10_형상관리](../10_형상관리/README.md) BASELINE | BASELINE_CI_MAP | N:M |
+| [14_연계관리](../14_연계관리/README.md) INTERFACE | INTERFACE_CI_MAP | N:M |
+| [15_백업관리](../15_백업관리/README.md) BACKUP | BACKUP_CI_MAP | N:M |
+| [12_이벤트관리](../12_이벤트관리/README.md) EVENT | 직접 FK(CI_ID) | N:1 |
+
+전체 13개 도메인 간 연결을 한눈에 보려면 정합성 검토용 ERD(Claude Artifact)를 참고하세요.
+
 ## 참고 및 관리 방법
 - 원본 데이터는 직접 수정하지 않고, 가공이 필요한 경우 별도 사본을 만들어 작업합니다.
 - 데이터 추가/변경 시 위 목록 표를 함께 갱신합니다.

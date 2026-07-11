@@ -26,6 +26,11 @@
 | ROLLBACK_YN | 롤백 여부 | |
 | IMPACT_LEVEL | 영향도 | |
 | RELATED_DESC | 변경 상세 내용/사유 | |
+| TRIGGERED_BY_INCIDENT_ID | 이 변경을 촉발한 장애 ID | FK → [2_장애관리](../2_장애관리/README.md) INCIDENT.INCIDENT_ID (선택, 장애 대응으로 발생한 변경인 경우만) |
+
+## 장애관리와의 연결(양방향)
+- `2_장애관리`의 `CAUSED_BY_CHG_TICKET_ID`가 "이 장애가 어떤 변경 때문에 발생했는지"(CHG→INC)를 나타낸다면, 이 `TRIGGERED_BY_INCIDENT_ID`는 반대 방향으로 "이 변경이 어떤 장애 때문에 촉발됐는지"(INC→CHG, `RAW/erd-참고용.png`의 "변경요청/Change Request" 흐름)를 나타냅니다. 서로 다른 두 관계이므로 별도 FK로 관리합니다.
+- 변경 1건의 촉발 장애는 최대 1건이라 **N:1** 관계이며 중간 테이블 없이 FK로 직접 연결합니다.
 
 ## 구성관리와의 연결
 - 변경 1건은 여러 CI에 영향을 줄 수 있고, CI 1건도 여러 변경 이력을 가질 수 있어 **N:M** 관계입니다.

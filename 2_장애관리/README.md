@@ -30,6 +30,17 @@
 - 실제 연결은 **`INCIDENT_CI_MAP` 중간 테이블**을 통해 관리합니다. 설계 근거(ERD)는 [3_구성관리](../3_구성관리/README.md), 데이터 파일은 장애 도메인 하위의 [장애이력/](장애이력/README.md) 폴더에 둡니다.
 - 변경이 원인이 된 장애는 `CAUSED_BY_CHG_TICKET_ID` 필드로 [1_변경관리](../1_변경관리/README.md)의 CHANGE 테이블과 직접 연결합니다(1건의 장애는 원인 변경이 최대 1건이므로 중간 테이블 없이 FK로 처리).
 
+## 다른 도메인에서 이 INCIDENT를 참조하는 관계 (2026-07-11 확장)
+`RAW/erd-참고용.png` 기준 위키 재정렬로 아래 도메인들이 INCIDENT를 참조하게 되었습니다.
+
+| 참조 도메인 | 중간테이블/FK | 관계 | 의미 |
+|---|---|---|---|
+| [8_요청관리](../8_요청관리/README.md) REQUEST | REQUEST_INCIDENT_MAP | N:M | 요청이 장애로 확대(에스컬레이션) |
+| [6_문제관리](../6_문제관리/README.md) PROBLEM | PROBLEM_INCIDENT_MAP | N:M | 반복 장애의 근본원인 조사 |
+| [9_서비스수준관리](../9_서비스수준관리/README.md) SLA | SLA_INCIDENT_MAP | N:M | 장애가 SLA 목표 미달의 원인 |
+| [1_변경관리](../1_변경관리/README.md) CHANGE | 직접 FK(`TRIGGERED_BY_INCIDENT_ID`) | N:1 | 장애 대응으로 변경이 촉발됨(위 `CAUSED_BY_CHG_TICKET_ID`와는 반대 방향) |
+| [12_이벤트관리](../12_이벤트관리/README.md) EVENT | 직접 FK(`ESCALATED_INCIDENT_ID`) | N:1 | 이벤트가 장애로 확대됨 |
+
 ## 생성된 테이블 파일
 | 파일 위치 | 설명 | 건수 |
 |---|---|---|
