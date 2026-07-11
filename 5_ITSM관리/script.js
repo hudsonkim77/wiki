@@ -14,10 +14,11 @@
     const row = document.createElement('div');
     row.className = 'bar-row';
 
+    const displayLabel = d.label || d.category;
     const label = document.createElement('div');
     label.className = 'bar-label';
-    label.textContent = d.category;
-    label.title = d.category;
+    label.textContent = displayLabel;
+    label.title = displayLabel;
 
     const track = document.createElement('div');
     track.className = 'bar-track';

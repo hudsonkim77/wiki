@@ -7,22 +7,23 @@
 const ITSM_DASHBOARD_DATA = {
   snapshotDate: '2026-07-11',
   totalAssets: 310,
+  // label: 화면 표시용 한글 라벨. category(원본 CI_CATEGORY 코드)는 그대로 두고 표시 문구만 한글로 대체.
   assetsByCategory: [
-    { category: 'Storage', count: 115 },
-    { category: 'VM', count: 30 },
-    { category: 'Staff', count: 30 },
-    { category: 'PC', count: 30 },
-    { category: 'Server', count: 20 },
-    { category: 'Internal_Security_Sol', count: 15 },
-    { category: 'DMZ_Compute', count: 15 },
-    { category: 'Switch', count: 10 },
-    { category: 'Network_Security', count: 10 },
-    { category: 'L2_PAGE', count: 10 },
-    { category: 'Network_Equipment', count: 8 },
-    { category: 'L3_PAGE', count: 8 },
-    { category: 'L1_PAGE', count: 4 },
-    { category: 'Peripheral', count: 3 },
-    { category: 'Security_Management', count: 2 }
+    { category: 'Storage', label: '스토리지', count: 115 },
+    { category: 'VM', label: '가상머신(VM)', count: 30 },
+    { category: 'Staff', label: '인력', count: 30 },
+    { category: 'PC', label: 'PC', count: 30 },
+    { category: 'Server', label: '서버', count: 20 },
+    { category: 'Internal_Security_Sol', label: '내부보안솔루션', count: 15 },
+    { category: 'DMZ_Compute', label: 'DMZ 서버', count: 15 },
+    { category: 'Switch', label: '스위치', count: 10 },
+    { category: 'Network_Security', label: '네트워크 보안', count: 10 },
+    { category: 'L2_PAGE', label: '웹페이지(2단계)', count: 10 },
+    { category: 'Network_Equipment', label: '네트워크 장비', count: 8 },
+    { category: 'L3_PAGE', label: '웹페이지(3단계)', count: 8 },
+    { category: 'L1_PAGE', label: '웹페이지(1단계)', count: 4 },
+    { category: 'Peripheral', label: '주변기기', count: 3 },
+    { category: 'Security_Management', label: '보안관제', count: 2 }
   ],
   scoreboard: {
     changeCount: 10,
