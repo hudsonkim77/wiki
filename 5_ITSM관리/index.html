@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ITSM 통합관리대시보드</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app-nav"></div>
+
+<main>
+  <section class="top-row">
+    <div class="panel hero-figure">
+      <div class="label">총 자산수</div>
+      <div class="value" id="total-assets">0</div>
+      <div class="note">3_구성관리/CI.csv 기준 · 스냅샷 <span id="snapshot-date"></span></div>
+    </div>
+
+    <div class="panel">
+      <p class="panel-title">카테고리별 자산 현황</p>
+      <div class="bar-chart" id="category-bar-chart"></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <p class="panel-title">현황</p>
+    <div class="scoreboard" id="scoreboard"></div>
+  </section>
+</main>
+
+<footer>
+  <a href="개인정보처리방침.html">개인정보처리방침</a>
+  <a href="이용약관.html">이용약관</a>
+</footer>
+
+<script src="data.js"></script>
+<script src="nav.js"></script>
+<script src="script.js"></script>
+<script>renderNav('home');</script>
+</body>
+</html>
