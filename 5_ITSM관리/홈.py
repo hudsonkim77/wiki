@@ -174,5 +174,6 @@ nav = st.navigation([
     st.Page(str(PAGES_DIR / "14_연계관리.py"), title="연계관리"),
     st.Page(str(PAGES_DIR / "15_백업관리.py"), title="백업관리"),
     st.Page(str(PAGES_DIR / "4_경영관리.py"), title="경영관리"),
+    st.Page(str(PAGES_DIR / "16_ERD.py"), title="ERD"),
 ])
 nav.run()

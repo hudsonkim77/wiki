@@ -62,3 +62,6 @@ st.markdown(
     'ITIL v4 기반 IT서비스운영관리 WBS 및 진척현황</a>',
     unsafe_allow_html=True,
 )
+# ERD는 claude.ai 외부 링크가 아니라 앱 내부 페이지(pages/16_ERD.py)라 st.page_link로 연결한다
+# (내부 페이지 이동은 Streamlit 라우팅을 타야 하므로 WBS처럼 raw <a href>를 쓰지 않음).
+st.page_link("pages/16_ERD.py", label="ERD: 통합 데이터 모델 ERD(논리/물리)", icon="🗺️")

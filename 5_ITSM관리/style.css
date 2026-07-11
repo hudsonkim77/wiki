@@ -683,3 +683,59 @@ footer a:hover {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
+/* ---------- 통합 데이터 모델 ERD (논리/물리 토글, Mermaid.js) ---------- */
+.erd-toggle-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.erd-toggle-buttons button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.erd-toggle-buttons button:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.erd-toggle-buttons button.active {
+  background: var(--accent);
+  color: #1a1206;
+  border-color: var(--accent);
+}
+
+.erd-mermaid-scroll {
+  position: relative;
+  overflow-x: auto;
+  background: var(--page-plane);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* display:none 대신 visibility:hidden을 쓰는 이유 — Mermaid는 렌더링 시점에 컨테이너의
+   실제 치수를 읽어 엣지 경로를 계산하는데, display:none인 요소는 치수가 0이 되어
+   자기참조 관계(예: CI-CI, BACKUP-BACKUP) 엣지가 NaN 좌표로 깨지는 버그가 있었다. */
+.erd-mermaid-hidden {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Mermaid는 svg에 기본으로 max-width:100%를 넣어 컨테이너에 맞춰 축소시키는데,
+   테이블이 26개인 물리 모델은 그렇게 하면 글자를 읽을 수 없을 만큼 작아진다.
+   원본 크기 그대로 두고 .erd-mermaid-scroll의 overflow-x로 가로 스크롤하게 한다. */
+.erd-mermaid-scroll svg {
+  max-width: none !important;
+  width: auto !important;
+}
