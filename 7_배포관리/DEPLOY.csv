@@ -1,1 +1,5 @@
 DEPLOY_ID,DEPLOY_NAME,DEPLOY_TYPE,DEPLOY_STATUS,PLANNED_DT,DEPLOYED_DT,OWNER_TEAM,DESC
+DEP_20260711_001,카테고리 한글라벨 적용 Streamlit 재배포,정기,배포완료,2026-07-11,2026-07-11,정보화기획팀,GitHub push 후 Streamlit Community Cloud 자동 재배포
+DEP_20260711_002,구성관리 CI 등록/조회 CRUD 배포,정기,배포완료,2026-07-11,2026-07-11,정보화기획팀,Streamlit Cloud 자동 재배포. pages/3_구성관리.py CI 추가/삭제 기능 배포
+DEP_20260711_003,변경관리 CRUD 배포,정기,배포완료,2026-07-11,2026-07-11,정보화기획팀,Streamlit Cloud 자동 재배포. pages/1_변경관리.py 등록/조회 화면 배포(WBS #1 100% 완료)
+DEP_20260711_004,좌측 메뉴-폴더 구조 정합화 배포,정기,배포완료,2026-07-11,2026-07-11,정보화기획팀,Streamlit Cloud 자동 재배포. 신규 도메인 10개(문제~백업관리) 조회 페이지 및 사이드바 재정렬 배포
