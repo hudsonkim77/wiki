@@ -29,6 +29,9 @@ CAT_COLORS = [
 
 st.set_page_config(page_title="ITSM 통합관리대시보드", layout="wide")
 st.logo(str(ROOT / "5_ITSM관리" / "assets" / "logo-full-flat.png"), icon_image=str(ROOT / "5_ITSM관리" / "assets" / "logo-mark-flat.png"))
+# st.logo()는 크기를 small/medium/large로만 조절 가능해 400px 이상으로 키울 수 없다.
+# 가독성 요구사항(폭 400px 이상)을 맞추기 위해 본문 상단에 별도로 큰 로고를 노출한다.
+st.image(str(ROOT / "5_ITSM관리" / "assets" / "logo-nav-flat.png"), width=420)
 
 ci_df = pd.read_csv(CI_CSV)
 change_df = pd.read_csv(CHANGE_CSV)

@@ -19,6 +19,7 @@ from labels import CATEGORY_LABELS_KO  # noqa: E402
 HISTORY_COLUMNS = ["HISTORY_ID", "CI_ID", "CI_NAME", "CI_CATEGORY", "ACTION", "ACTION_DT", "ACTION_BY", "NOTE"]
 
 st.logo(str(ROOT / "assets" / "logo-full-flat.png"), icon_image=str(ROOT / "assets" / "logo-mark-flat.png"))
+st.image(str(ROOT / "assets" / "logo-nav-flat.png"), width=420)
 
 st.title("구성관리")
 
