@@ -6,7 +6,7 @@
 // 원본 CSV가 갱신되면 이 파일도 다시 집계해서 갱신해야 합니다(자동 연동 아님).
 const ITSM_DASHBOARD_DATA = {
   snapshotDate: '2026-07-11',
-  totalAssets: 310,
+  totalAssets: 311,
   // label: 화면 표시용 한글 라벨. category(원본 CI_CATEGORY 코드)는 그대로 두고 표시 문구만 한글로 대체.
   assetsByCategory: [
     { category: 'Storage', label: '스토리지', count: 115 },
@@ -18,7 +18,7 @@ const ITSM_DASHBOARD_DATA = {
     { category: 'DMZ_Compute', label: 'DMZ 서버', count: 15 },
     { category: 'Switch', label: '스위치', count: 10 },
     { category: 'Network_Security', label: '네트워크 보안', count: 10 },
-    { category: 'L2_PAGE', label: '웹페이지(2단계)', count: 10 },
+    { category: 'L2_PAGE', label: '웹페이지(2단계)', count: 11 },
     { category: 'Network_Equipment', label: '네트워크 장비', count: 8 },
     { category: 'L3_PAGE', label: '웹페이지(3단계)', count: 8 },
     { category: 'L1_PAGE', label: '웹페이지(1단계)', count: 4 },

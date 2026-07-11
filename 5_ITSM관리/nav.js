@@ -1,12 +1,14 @@
 // 모든 페이지에서 공유하는 상단 메뉴바 + 하단 푸터 로고.
 // 페이지마다 <div id="app-nav"></div> 와 <footer>...</footer>를 두고
-// renderNav('home'|'change'|'incident'|'ci')를 호출하면 메뉴바가 그려지고
+// renderNav('home'|'change'|'incident'|'ci'|'mgmt')를 호출하면 메뉴바가 그려지고
 // (현재 페이지 버튼 활성 표시), 같은 호출이 footer 맨 앞에 로고도 넣어줍니다.
 (function () {
   const NAV_ITEMS = [
+    { key: 'home', label: 'ITSM관리', href: 'index.html' },
     { key: 'change', label: '변경관리', href: '변경관리.html' },
     { key: 'incident', label: '장애관리', href: '장애관리.html' },
-    { key: 'ci', label: '구성관리', href: '구성관리.html' }
+    { key: 'ci', label: '구성관리', href: '구성관리.html' },
+    { key: 'mgmt', label: '경영관리', href: '경영관리.html' }
   ];
 
   const LOGO_NAV_SRC = 'assets/logo-nav.png';
