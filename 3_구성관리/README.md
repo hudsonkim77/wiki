@@ -95,3 +95,4 @@ CHANGE (변경관리) 1 ──< INCIDENT (장애관리)   * 변경이 유발한 
 | 2026-07-11 | `구성이력/CI_HISTORY.csv` 신설(최초 4건 백필) 및 `pages/3_구성관리.py` CI 등록/삭제 화면 구현으로 `CFG_WEB_022`의 `CHG_TICKET_ID`를 `CHG_20260711_009`로 갱신 | Claude |
 | 2026-07-11 | 상단 네비 로고 가독성 개선 작업으로 `CFG_WEB_019`~`022`의 `CHG_TICKET_ID`를 `CHG_20260711_010`으로 갱신 | Claude |
 | 2026-07-11 | Streamlit 배포판 로고 폭 확대(st.image) 작업으로 `CFG_WEB_019`~`022`의 `CHG_TICKET_ID`를 `CHG_20260711_011`로 갱신 | Claude |
+| 2026-07-11 | 패널 제목/테두리 스타일 개선 작업으로 `CFG_WEB_019`~`022`의 `CHG_TICKET_ID`를 `CHG_20260711_013`으로 갱신 | Claude |
