@@ -65,3 +65,15 @@ st.markdown(
 # ERD는 claude.ai 외부 링크가 아니라 앱 내부 페이지(pages/16_ERD.py)라 st.page_link로 연결한다
 # (내부 페이지 이동은 Streamlit 라우팅을 타야 하므로 WBS처럼 raw <a href>를 쓰지 않음).
 st.page_link("pages/16_ERD.py", label="ERD: 통합 데이터 모델 ERD(논리/물리)", icon="🗺️")
+
+st.divider()
+st.subheader("구축산출물")
+st.caption("15페이지 CRUD 기능테스트 결과 기반 — 원본 카탈로그: ../4_경영관리/구축산출물목록.md")
+# 아래 목록은 4_경영관리/구축산출물목록.md와 동일 내용을 유지해야 한다(자동 연동 아님).
+st.markdown(
+    "- [테스트결과서 - 기능테스트](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_테스트결과서-기능테스트.pdf)\n"
+    "- [프로그램명세서](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_프로그램명세서.pdf)\n"
+    "- [데이터베이스명세서](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_데이터베이스명세서.pdf)\n"
+    "- [아키텍처결과서](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_아키텍처결과서.pdf)\n"
+    "- [표준정의서(용어, 도메인)](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_표준정의서(용어_도메인).pdf)"
+)
