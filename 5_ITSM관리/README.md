@@ -15,14 +15,19 @@
 - **맨 하단 푸터**: 개인정보처리방침, 이용약관 하이퍼링크
 
 ## 파일 구성
+이 폴더에는 **정적 HTML 버전**과 **Streamlit(Python) 버전** 두 가지 구현이 함께 있습니다. 실제 배포·서비스는 Streamlit 버전으로 하고, 정적 HTML 버전은 이미 CI로 등록되어 있어 그대로 남겨둔 상태입니다.
+
 | 파일 | 설명 |
 |---|---|
-| `index.html` | 대시보드 메인 화면(HTML) |
-| `변경관리.html` / `장애관리.html` / `구성관리.html` | 상단 메뉴 버튼이 연결되는 각 관리 페이지. 현재는 "입력 화면은 추후 설계 예정" placeholder만 있음 |
-| `style.css` | 스타일 (다크/라이트 모드 자동 대응) |
-| `nav.js` | 모든 페이지가 공유하는 상단 메뉴바 렌더링. `renderNav(activeKey)` 호출로 현재 페이지 버튼을 활성 표시 |
-| `script.js` | index 화면의 총 자산수/카테고리 막대바/스코어보드 렌더링 |
-| `data.js` | 대시보드에 쓰이는 데이터 스냅샷 (CSV에서 집계한 값을 하드코딩) |
+| `index.html` | (정적 HTML 버전) 대시보드 메인 화면 |
+| `변경관리.html` / `장애관리.html` / `구성관리.html` | (정적 HTML 버전) 상단 메뉴 버튼이 연결되는 각 관리 페이지. "입력 화면은 추후 설계 예정" placeholder만 있음 |
+| `style.css` | (정적 HTML 버전) 스타일 (다크/라이트 모드 자동 대응) |
+| `nav.js` | (정적 HTML 버전) 모든 페이지가 공유하는 상단 메뉴바 렌더링. `renderNav(activeKey)` 호출로 현재 페이지 버튼을 활성 표시 |
+| `script.js` | (정적 HTML 버전) index 화면의 총 자산수/카테고리 막대바/스코어보드 렌더링 |
+| `data.js` | (정적 HTML 버전) 대시보드에 쓰이는 데이터 스냅샷 (CSV에서 집계한 값을 하드코딩) |
+| `홈.py` | (Streamlit 버전) 메인 화면. pandas로 CI/CHANGE/INCIDENT CSV를 직접 읽어 총 자산수·카테고리별 막대바(Altair)·스코어보드를 매번 최신값으로 렌더링(하드코딩 스냅샷 아님) |
+| `pages/1_변경관리.py`, `pages/2_장애관리.py`, `pages/3_구성관리.py` | (Streamlit 버전) Streamlit 표준 멀티페이지 구조. 사이드바에 항상 노출되며 현재는 "입력 화면은 추후 설계 예정" placeholder만 있음 |
+| `../requirements.txt` (repo 루트) | Streamlit Cloud 배포용 의존성(`streamlit`, `pandas`, `altair`) |
 
 ## 데이터 출처 및 갱신 방법
 `data.js`의 값은 아래 원본을 2026-07-11 기준으로 집계한 **스냅샷**이며, 자동 연동이 아닙니다. 원본이 바뀌면 수동으로 다시 집계해 `data.js`를 갱신해야 합니다.
@@ -51,6 +56,32 @@
 
 최초 구축 변경 티켓: `CHG_20260711_001` ([1_변경관리/CHANGE.csv](../1_변경관리/CHANGE.csv)), 연결 매핑: `MAP_0061`~`MAP_0064` ([변경히스토리/CHANGE_CI_MAP.csv](../1_변경관리/변경히스토리/CHANGE_CI_MAP.csv))
 
+## 배포 (GitHub 연동 + Streamlit)
+
+### GitHub
+- 저장소: **https://github.com/hudsonkim77/wiki** (public, `main` 브랜치)
+- `wiki` 전체가 그대로 하나의 GitHub 저장소입니다. 새 커밋을 만들면 `git push`로 반영됩니다.
+
+### Streamlit Community Cloud 배포 절차
+Streamlit은 파이썬 프레임워크라 정적 HTML을 그대로 올릴 수 없어서, 배포용으로 `홈.py`/`pages/`를 추가했습니다(위 파일 구성 참고). 배포는 아래 단계가 필요하고, 3번까지는 본인 GitHub 로그인 세션이 있어야 하는 단계라 직접 진행해야 합니다.
+
+1. **https://share.streamlit.io** 접속 → GitHub 계정(`hudsonkim77`)으로 로그인
+2. "Create app" → "Deploy a public app from GitHub"
+3. Repository: `hudsonkim77/wiki`, Branch: `main`, **Main file path: `5_ITSM관리/홈.py`**
+4. Deploy 클릭 — repo 루트의 `requirements.txt`(streamlit/pandas/altair)가 자동으로 설치됨
+
+배포된 앱 URL이 나오면 이 표에 기록합니다.
+
+| 배포일 | URL | 비고 |
+|---|---|---|
+| (배포 후 기입) | | |
+
+### 정적 HTML → Streamlit으로 옮기며 달라진 점
+- **상단 메뉴바 → 좌측 사이드바**: Streamlit의 멀티페이지 앱은 사이드바에 페이지 목록을 자동으로 띄우는 방식이 기본이라, `index.html` 버전의 "어디서든 상단 메뉴 유지" 요구사항은 Streamlit에서는 "사이드바에 홈/변경관리/장애관리/구성관리가 항상 노출"되는 형태로 구현됩니다.
+- **데이터 하드코딩 → 실시간 집계**: `data.js`는 특정 시점 값을 박아넣은 스냅샷이었지만, `홈.py`는 매 요청마다 `CI.csv`/`CHANGE.csv`/`INCIDENT.csv`를 직접 읽어 집계하므로 원본이 바뀌면 대시보드도 자동으로 갱신됩니다(단, 구성관리 추가/삭제 건수는 아직 전체 이력 로그가 없어 `홈.py`에도 상수로 남아 있음 — 아래 데이터 출처 표 참고).
+- **카테고리 막대바**: Altair로 다시 그렸고 색상은 기존 8색 팔레트를 그대로 사용했습니다.
+- 로컬에서 `streamlit run 5_ITSM관리/홈.py`로 직접 실행해 데이터·차트가 정상 렌더링되는 것을 확인했습니다.
+
 ## 참고 및 관리 방법
 - 각 관리(변경/장애/구성관리) 페이지의 실제 입력 화면은 별도 설계 예정입니다. 설계가 끝나면 각 placeholder 페이지의 본문을 실제 화면으로 교체합니다(상단 메뉴바 이동은 이미 구현됨).
 - 구성관리 추가/삭제 이력을 담는 전체 로그 테이블이 설계되면 `data.js`의 `ciAdded`/`ciRemoved` 값과 이 README의 데이터 출처 표를 함께 갱신합니다.
@@ -62,3 +93,4 @@
 | 2026-07-11 | `5_ITSM관리` 폴더 신설, 통합관리대시보드 소스(`index.html`/`style.css`/`script.js`/`data.js`) 최초 생성. 총 자산수·카테고리별 막대바·변경/장애/구성관리 스코어보드·정책 링크 푸터·상단 관리 메뉴바(입력창은 추후 설계) 구현 | Claude |
 | 2026-07-11 | 카테고리별 막대바에 8색 순환 컬러 적용. 상단 메뉴바를 `nav.js` 공용 컴포넌트로 분리하고 `변경관리.html`/`장애관리.html`/`구성관리.html` placeholder 페이지를 신설해 실제 페이지 이동 구현(로고 클릭 시 항상 `index.html`로 복귀, 현재 페이지 버튼 활성 표시). 기존 toast 안내 방식은 제거 | Claude |
 | 2026-07-11 | 통합관리대시보드 자신을 CI로 등록(`CFG_WEB_019`~`022`, 4건)하고 최초 구축을 변경 이력(`CHG_20260711_001`, `MAP_0061`~`0064`)으로 연결. `data.js`의 총 자산수(310)·변경건수(10)·구성관리(추가)(4)에 반영 | Claude |
+| 2026-07-11 | `wiki` 저장소를 GitHub(`hudsonkim77/wiki`, public)에 연동·push. Streamlit 배포를 위해 `홈.py`+`pages/1_변경관리.py`·`2_장애관리.py`·`3_구성관리.py`(멀티페이지 앱)와 repo 루트 `requirements.txt`를 신규 추가하고 로컬에서 `streamlit run`으로 정상 동작 확인. 이 README에 GitHub 연동 정보와 Streamlit Community Cloud 배포 절차 기록 | Claude |
