@@ -31,6 +31,7 @@ COLUMN_LABELS_KO = {
     "BASELINE_ID": "베이스라인 ID", "BASELINE_NAME": "베이스라인명", "VERSION": "버전",
     "BASELINE_TYPE": "베이스라인 유형", "CREATED_DT": "생성 일시", "APPROVED_DT": "승인 일시",
     "RESOLVED_PROBLEM_ID": "조치 문제 ID",
+    "BASELINE_VERSION": "베이스라인 버전(스냅샷)", "BASELINE_AREA": "베이스라인 영역",
     "OPS_ID": "운영상태 ID", "CHECK_DT": "점검 일시", "METRIC_SUMMARY": "지표 요약",
     "EVENT_ID": "이벤트 ID", "EVENT_TITLE": "이벤트 제목", "EVENT_TYPE": "이벤트 유형",
     "SOURCE_OPS_ID": "감지 운영상태 ID", "EVENT_STATUS": "이벤트 상태",

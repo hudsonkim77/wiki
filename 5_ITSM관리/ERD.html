@@ -294,7 +294,10 @@ erDiagram
     BASELINE_CI_MAP {
         string MAP_ID PK "매핑 ID(MAP_ID)"
         string BASELINE_ID FK "베이스라인 ID(BASELINE_ID)"
+        string BASELINE_VERSION "베이스라인 버전(스냅샷)(BASELINE_VERSION)"
         string CI_ID FK "구성항목 ID(CI_ID)"
+        string BASELINE_AREA "베이스라인 영역(BASELINE_AREA)"
+        date APPLIED_DT "적용 일시(APPLIED_DT)"
         string NOTE "비고(NOTE)"
     }
     OPS_STATUS {
