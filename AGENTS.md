@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Domain context
+
+The numbered domain folders (`1_변경관리`, `2_장애관리`, `3_구성관리`, `6_문제관리` … `15_백업관리`, plus `5_ITSM관리` as the app) are **not arbitrary** — they model how a **Korean public institution (대한민국 공공기관) structures its standard operational management (표준운영관리)**. The design references the **ITIL v4** standard but adapts it to this public-sector operating structure, so the set and grouping of domains reflects that adaptation rather than a strict 1:1 ITIL mapping. Keep this intent in mind when adding or reorganizing domains/pages.
+
 ## Cursor Cloud specific instructions
 
 This repo is a **Streamlit multipage app** (Korean ITSM 통합관리대시보드). Data lives in CSV files across the numbered domain folders (e.g. `3_구성관리/CI.csv`, `1_변경관리/CHANGE.csv`); there is no database.
