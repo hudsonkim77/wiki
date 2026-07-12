@@ -16,3 +16,16 @@ This repo is a **Streamlit multipage app** (Korean ITSM 통합관리대시보드
   `python3 -m py_compile 5_ITSM관리/홈.py 5_ITSM관리/*.py 5_ITSM관리/pages/*.py`.
 - **CRUD writes to tracked CSVs.** The management pages (e.g. `pages/1_변경관리.py`) read/write the domain CSVs directly. Exercising the "등록/삭제" forms mutates files like `1_변경관리/CHANGE.csv` — revert test data with `git checkout -- <path>` if you don't intend to commit it.
 - **경영관리 page is password-gated** via `st.secrets["MGMT_PASSWORD"]`. To open it, create `.streamlit/secrets.toml` (gitignored) with `MGMT_PASSWORD = "..."`; without it the page shows a warning and blocks its body. See `.streamlit/secrets.toml.example`.
+
+### `ITSM_CURSOR/` — new React + FastAPI app (redesign)
+
+`ITSM_CURSOR/` is a **separate, modern reimplementation** of the ITSM dashboard: same data/domain structure and CSVs (copied from the wiki root, so data stays consistent), but a fully custom **React (Vite + TS + Tailwind)** frontend backed by a **FastAPI** service. It is independent of the root Streamlit app. See `ITSM_CURSOR/README.md`.
+
+- **Two dev processes** (run both):
+  - Backend `:8000` — `cd "ITSM_CURSOR/5_ITSM관리/backend" && MGMT_PASSWORD=7587 python3 -m uvicorn app:app --host 0.0.0.0 --port 8000 --reload`
+  - Frontend `:5173` — `cd "ITSM_CURSOR/5_ITSM관리/frontend" && npm run dev` (Vite proxies `/api` → `:8000`, so **the backend must be running** or the UI shows load errors).
+- **경영관리 password here is an env var** (`MGMT_PASSWORD`), NOT `secrets.toml` — this app does not use Streamlit. If unset, `/api/management/unlock` returns 503.
+- **CRUD writes to CSV + folder history.** Every create/delete via the API updates the domain's master CSV **and appends a row to that folder's `_HISTORY.csv`** (`backend/domains.py` lists the domain→folder/CSV mapping).
+- **Data layer is config-driven**: columns come from the CSV header; Korean labels live in `backend/domains.py` (`COLUMN_LABELS_KO`). To add/adjust a domain, edit `DOMAINS` there — the frontend renders generically.
+- **ERD** is reused from the wiki: `backend` extracts the mermaid `erDiagram` blocks from `ITSM_CURSOR/5_ITSM관리/ERD.html`; the React page renders them with `mermaid`.
+- `node_modules`/`dist` under `frontend/` are gitignored (see `frontend/.gitignore`).
