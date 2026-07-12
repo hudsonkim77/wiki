@@ -76,5 +76,6 @@ st.markdown(
     "- [데이터베이스명세서](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_데이터베이스명세서.pdf)\n"
     "- [아키텍처결과서](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_아키텍처결과서.pdf)\n"
     "- [표준정의서(용어, 도메인)](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_표준정의서(용어_도메인).pdf)\n"
-    "- [초기 베이스라인 정의서 v1.0](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_초기베이스라인정의서.pdf)"
+    "- [초기 베이스라인 정의서 v1.0](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_초기베이스라인정의서.pdf)\n"
+    "- [초기 베이스라인 정의서 v1.1(DDL 개정판)](https://github.com/hudsonkim77/wiki/blob/main/4_경영관리/구축산출물/20260712_초기베이스라인정의서_v1.1.pdf)"
 )
