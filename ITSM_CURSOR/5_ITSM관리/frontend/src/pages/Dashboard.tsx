@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis,
+  Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart,
+  ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { Boxes, GitBranch, AlertTriangle, Search, TrendingUp, TrendingDown, Network } from "lucide-react";
 import { getDashboard, type DashboardData } from "../api";
-import { ICONS } from "../lib/ui";
+import { ICONS, statusChip } from "../lib/ui";
 
 function Kpi({ label, value, icon: Icon, tone }: { label: string; value: number; icon: any; tone: string }) {
   return (
@@ -34,6 +35,15 @@ export default function Dashboard() {
 
   const barData = [...data.category].sort((a, b) => b.count - a.count);
   const colors = ["#3a5eef", "#5b84fa", "#8fb0ff"];
+
+  const STATUS_LABELS: Record<string, string> = {
+    OPERATIONAL: "운영중", Active: "활성", STANDBY: "대기", 미지정: "미지정",
+  };
+  const donutColors = ["#3a5eef", "#22c3a6", "#f4a63b", "#8fb0ff", "#e5679a"];
+  const donutData = data.statusDistribution.map((s) => ({
+    name: STATUS_LABELS[s.status] || s.status,
+    value: s.count,
+  }));
 
   return (
     <div className="space-y-8">
@@ -80,22 +90,36 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
 
-        <div className="space-y-4">
-          <div className="card p-5">
-            <h2 className="mb-3 font-semibold text-slate-900">구성 이력</h2>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between rounded-xl bg-emerald-50 px-4 py-3">
-                <span className="flex items-center gap-2 text-sm text-emerald-700">
-                  <TrendingUp className="h-4 w-4" /> 자산 추가
-                </span>
-                <span className="text-lg font-bold text-emerald-700">{data.kpis.ciAdded}</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl bg-rose-50 px-4 py-3">
-                <span className="flex items-center gap-2 text-sm text-rose-700">
-                  <TrendingDown className="h-4 w-4" /> 자산 삭제
-                </span>
-                <span className="text-lg font-bold text-rose-700">{data.kpis.ciRemoved}</span>
-              </div>
+        <div className="card flex flex-col p-6">
+          <div className="mb-2 flex items-center justify-between">
+            <h2 className="font-semibold text-slate-900">자산 상태 분포</h2>
+            <span className="text-xs text-slate-400">CI.STATUS</span>
+          </div>
+          <ResponsiveContainer width="100%" height={220}>
+            <PieChart>
+              <Pie
+                data={donutData} dataKey="value" nameKey="name"
+                cx="50%" cy="50%" innerRadius={52} outerRadius={82} paddingAngle={2} stroke="none"
+              >
+                {donutData.map((_, i) => (
+                  <Cell key={i} fill={donutColors[i % donutColors.length]} />
+                ))}
+              </Pie>
+              <Tooltip
+                formatter={(v) => [`${v}건`, "자산수"]}
+                contentStyle={{ borderRadius: 12, border: "1px solid #e5e9f2", fontSize: 12 }}
+              />
+              <Legend verticalAlign="bottom" height={24} iconType="circle" wrapperStyle={{ fontSize: 12 }} />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <div className="flex items-center justify-between rounded-xl bg-emerald-50 px-3 py-2">
+              <span className="flex items-center gap-1.5 text-xs text-emerald-700"><TrendingUp className="h-3.5 w-3.5" /> 자산 추가</span>
+              <span className="text-sm font-bold text-emerald-700">{data.kpis.ciAdded}</span>
+            </div>
+            <div className="flex items-center justify-between rounded-xl bg-rose-50 px-3 py-2">
+              <span className="flex items-center gap-1.5 text-xs text-rose-700"><TrendingDown className="h-3.5 w-3.5" /> 자산 삭제</span>
+              <span className="text-sm font-bold text-rose-700">{data.kpis.ciRemoved}</span>
             </div>
           </div>
         </div>
@@ -116,6 +140,42 @@ export default function Dashboard() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      <section className="card overflow-hidden">
+        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+          <h2 className="font-semibold text-slate-900">최근 변경 이력</h2>
+          <Link to="/d/change" className="text-xs font-medium text-brand-600 hover:underline">전체 보기 →</Link>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm">
+            <thead className="bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <tr>
+                <th className="px-6 py-3">변경 티켓 ID</th>
+                <th className="px-6 py-3">변경 제목</th>
+                <th className="px-6 py-3">유형</th>
+                <th className="px-6 py-3">상태</th>
+                <th className="px-6 py-3">적용 일시</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {data.recentChanges.map((r, i) => (
+                <tr key={r.CHG_TICKET_ID || i} className="hover:bg-slate-50/70">
+                  <td className="whitespace-nowrap px-6 py-3 font-mono text-xs font-semibold text-brand-600">{r.CHG_TICKET_ID}</td>
+                  <td className="px-6 py-3 text-slate-700"><span className="line-clamp-1 max-w-[420px]" title={r.CHG_TITLE}>{r.CHG_TITLE}</span></td>
+                  <td className="whitespace-nowrap px-6 py-3 text-slate-500">{r.CHG_TYPE || "—"}</td>
+                  <td className="whitespace-nowrap px-6 py-3">
+                    <span className={`chip ${statusChip(r.CHG_STATUS)}`}>{r.CHG_STATUS || "미정"}</span>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-3 text-slate-500">{r.APPLIED_DT || "—"}</td>
+                </tr>
+              ))}
+              {data.recentChanges.length === 0 && (
+                <tr><td colSpan={5} className="px-6 py-10 text-center text-slate-400">변경 이력이 없습니다.</td></tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </section>
     </div>

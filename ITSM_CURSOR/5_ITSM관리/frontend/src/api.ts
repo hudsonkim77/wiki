@@ -40,7 +40,9 @@ export interface DashboardData {
     ciRemoved: number;
   };
   category: { category: string; label: string; count: number }[];
+  statusDistribution: { status: string; count: number }[];
   domainCounts: { key: string; title: string; icon: string; count: number }[];
+  recentChanges: Record<string, string>[];
 }
 
 export interface HistoryData {

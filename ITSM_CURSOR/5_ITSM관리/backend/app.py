@@ -208,6 +208,7 @@ def dashboard():
 
     ci_path = _csv_path(DOMAINS_BY_KEY["config"])
     category = []
+    status_dist = []
     total_assets = 0
     if ci_path.exists():
         ci = load_df(ci_path)
@@ -217,6 +218,18 @@ def dashboard():
             {"category": k, "label": CATEGORY_LABELS_KO.get(k, k), "count": int(v)}
             for k, v in vc.items()
         ]
+        if "STATUS" in ci.columns:
+            sc = ci["STATUS"].replace("", "미지정").value_counts()
+            status_dist = [{"status": k, "count": int(v)} for k, v in sc.items()]
+
+    # 대시보드 하단 테이블용 최근 변경 이력 (최신 8건)
+    change_path = _csv_path(DOMAINS_BY_KEY["change"])
+    recent_changes = []
+    if change_path.exists():
+        ch = load_df(change_path)
+        cols = ["CHG_TICKET_ID", "CHG_TITLE", "CHG_TYPE", "CHG_STATUS", "APPLIED_DT"]
+        cols = [c for c in cols if c in ch.columns]
+        recent_changes = ch[cols].tail(8).iloc[::-1].to_dict(orient="records")
 
     # 도메인별 건수
     domain_counts = [
@@ -243,7 +256,9 @@ def dashboard():
             "ciRemoved": ci_removed,
         },
         "category": category,
+        "statusDistribution": status_dist,
         "domainCounts": domain_counts,
+        "recentChanges": recent_changes,
     }
 
 
