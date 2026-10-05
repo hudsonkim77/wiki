@@ -1,123 +1,28 @@
 {
-  "meta": {
-    "title": "빚갚기 플랜",
-    "as_of": "2026-10-05",
-    "currency": "KRW",
-    "status": "planning",
-    "principle": "고금리 부채를 줄이되 비상현금을 바닥내지 않는다"
+  "meta":{"title":"빚갚기 플랜","as_of":"2026-10-05","currency":"KRW","status":"planning"},
+  "irp":{"balance_before_close":7543590,"estimated_tax_and_deductions":150000,"estimated_net_proceeds":7393590},
+  "estimated_emergency_cash_after_actions":2307355,
+  "debts":{
+    "apl":{"interest_rate_pct":16.9,"monthly_payment":745000,"balance_as_of_2026_09_10":25776328},
+    "daol":{"balance_reference":8052000,"interest_rate_pct":12.66,"repayment_type":"원리금균등","monthly_payment_simulation":656000,"estimated_final_month":"2027-10","accuracy":"기존 상환계획 기반; 실제 상환표 확인 필요"},
+    "sbi_auto":{"principal":3000000,"interest_rate_pct":15.2,"payoff_amount":3056235,"monthly_payment_after_payoff":0},
+    "sunshine_loan":{"balance_as_of_2026_09_17":1250024,"interest_rate_pct":9.91,"monthly_payment_estimate":150000,"maturity":"2027-07-02"},
+    "credit_counseling":{"normal_monthly_payment":430000,"planned_deferral_months":10,"estimated_monthly_interest_during_deferral":40000,"simulation_deferral_start":"2026-11","simulation_deferral_end":"2027-08"}
   },
-  "irp": {
-    "balance_before_close": 7543590,
-    "estimated_tax_and_deductions": 150000,
-    "estimated_net_proceeds": 7393590,
-    "tax_status": "estimated"
-  },
-  "one_time_plan": [
-    {
-      "order": 1,
-      "item": "SBI 차량담보대출 전액상환",
-      "amount": 3056235,
-      "breakdown": {
-        "principal": 3000000,
-        "accrued_interest": 26235,
-        "early_repayment_fee": 30000
-      },
-      "status": "planned"
-    },
-    {
-      "order": 2,
-      "item": "차량 미션 수리",
-      "amount": 1600000,
-      "detail": "광명 오토피엠 / 테컴 교체 + 미션 오버홀 / 현금가",
-      "warranty": "오버홀 6개월 또는 10000km",
-      "status": "planned"
-    },
-    {
-      "order": 3,
-      "item": "신복위 정상 변제 1개월",
-      "amount": 430000,
-      "status": "planned"
-    }
+  "monthly_simulation":[
+    {"month":"2026-11","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2026-12","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2027-01","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2027-02","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2027-03","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2027-04","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2027-05","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2027-06","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2027-07","apl":745000,"daol":656000,"sunshine":150000,"credit_counseling":40000,"sbi":0,"total":1591000},
+    {"month":"2027-08","apl":745000,"daol":656000,"sunshine":0,"credit_counseling":40000,"sbi":0,"total":1441000},
+    {"month":"2027-09","apl":745000,"daol":656000,"sunshine":0,"credit_counseling":430000,"sbi":0,"total":1831000},
+    {"month":"2027-10","apl":745000,"daol":660000,"sunshine":0,"credit_counseling":430000,"sbi":0,"total":1835000},
+    {"month":"2027-11 onward","apl":745000,"daol":0,"sunshine":0,"credit_counseling":430000,"sbi":0,"total":1175000}
   ],
-  "estimated_emergency_cash_after_actions": 2307355,
-  "debts": {
-    "apl": {
-      "interest_rate_pct": 16.9,
-      "monthly_payment": 745000,
-      "balance_reference": {
-        "date": "2026-09-10",
-        "amount": 25776328
-      },
-      "strategy": "정상상환 유지 후 비상현금 회복 시 우선 추가상환"
-    },
-    "sbi_auto": {
-      "principal": 3000000,
-      "interest_rate_pct": 15.2,
-      "monthly_payment_before_payoff": 104290,
-      "payoff_amount": 3056235,
-      "strategy": "IRP 수령 후 전액상환",
-      "target_balance": 0
-    },
-    "sunshine_loan": {
-      "balance_reference": {
-        "date": "2026-09-17",
-        "amount": 1250024
-      },
-      "interest_rate_pct": 9.91,
-      "monthly_payment_estimate": 150000,
-      "maturity": "2027-07-02",
-      "early_repayment_fee": 0,
-      "strategy": "정상상환"
-    },
-    "credit_counseling": {
-      "normal_monthly_payment": 430000,
-      "normal_payment_months_before_deferral": 1,
-      "planned_deferral_months": 10,
-      "estimated_monthly_interest_during_deferral": 40000,
-      "status": "deferral_not_yet_confirmed"
-    }
-  },
-  "monthly_cashflow_scenarios": {
-    "before_deferral_one_month": {
-      "apl": 745000,
-      "sunshine_loan": 150000,
-      "credit_counseling": 430000,
-      "sbi_auto": 0,
-      "total": 1325000
-    },
-    "during_deferral": {
-      "apl": 745000,
-      "sunshine_loan": 150000,
-      "credit_counseling_interest": 40000,
-      "sbi_auto": 0,
-      "total": 935000
-    },
-    "during_deferral_after_sunshine_loan_end": {
-      "apl": 745000,
-      "sunshine_loan": 0,
-      "credit_counseling_interest": 40000,
-      "sbi_auto": 0,
-      "total": 785000
-    }
-  },
-  "cashflow_improvement": {
-    "credit_counseling_deferral_monthly": 390000,
-    "sbi_payoff_monthly": 104290,
-    "combined_monthly": 494290
-  },
-  "reserve_plan": {
-    "starting_emergency_cash_estimate": 2307355,
-    "target_monthly_saving": 400000,
-    "months": 10,
-    "projected_added_cash": 4000000,
-    "projected_cash_before_unplanned_spending": 6307355
-  },
-  "next_actions": [
-    "IRP 실제 해지 실수령액 반영",
-    "SBI 완납 및 근저당/질권 해지비용 반영",
-    "차량 수리 실제 결제액 반영",
-    "신복위 유예 승인 및 정확한 기간 반영",
-    "비상현금 방어선 확정",
-    "비상현금 회복 후 APL 추가상환 재계산"
-  ]
+  "notes":["다올은 APL/햇살론/신복위와 별도 부채","다올 정확한 회차별 금액과 최종회차는 실제 상환표 확인 시 갱신","신복위 유예 승인 및 실제 기간 확정 시 월별 시뮬레이션 재산정"]
 }
